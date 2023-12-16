@@ -1,5 +1,5 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Builtin Elements
+# 内置元素
 
 ## Common properties
 

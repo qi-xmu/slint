@@ -1,9 +1,7 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Container Components
+# 容器组件
 
-When creating components, it's sometimes useful to influence where child
-elements are placed when used. For example, imagine a component that draws
-a label above whatever element the user places inside:
+当创建组件时，有时候会影响到子元素的位置。例如，想象一个组件，它在用户放置在内部的元素上方绘制一个标签：
 
 ```slint,ignore
 export component MyApp inherits Window {
@@ -18,10 +16,9 @@ export component MyApp inherits Window {
 }
 ```
 
-You can implement such a `BoxWithLabel` using a layout. By default child elements like
-the `Text` element become direct children of the `BoxWithLabel`, but we need them to become
-children of our layout instead. For this purpose, you can change the default child placement by using
-the `@children` expression inside the element hierarchy of a component:
+你可以使用一个布局来实现这样的 `BoxWithLabel`。
+默认情况下，像 `Text` 这样的子元素会成为 `BoxWithLabel` 的直接子元素，但是我们需要它们成为我们的布局的子元素。
+为此，您可以使用 `@children` 表达式来改变默认的子元素放置方式：
 
 ```slint
 component BoxWithLabel inherits GridLayout {

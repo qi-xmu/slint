@@ -1,42 +1,30 @@
 .. Copyright © SixtyFPS GmbH <info@slint.dev>
 .. SPDX-License-Identifier: MIT
 
-Introduction
+概述
 ============
 
-`Slint <https://slint.dev>`_ comes with an easy to learn and use language for you to describe user
-interfaces with. It is readable to both humans and machines.
+`Slint <https://slint.dev>`_ 是一个工具，它提供了一种易于学习和使用的语言，用于描述用户界面。这种语言对人类和机器都是可读的。
 
-This way, we have excellent tooling on one side, while also enabling
-designers and developers to know exactly what happens, by reading the code
-their machine uses to display the user interfaces.
+在Slint这种模式下，一方面，我们拥有优秀的工具。
+另一方面，能让设计师和开发者通过阅读他们的机器用来显示用户界面的代码，确切地知道发生了什么。
 
-This Slint language is either interpreted at run-time or compiled to native
-code, which gets built into your application together with the code in the same
-programming language providing the business logic. The Slint compiler can
-optimize the user interface and any resources it uses at compile time, so
-that user interfaces written in Slint use few resources, with regards to
-performance and storage.
+Slint语言在运行时被解释，或者编译成本地代码，然后与提供业务逻辑的同一种编程语言的代码一起构建到您的应用程序中。
+Slint编译器可以在编译时优化用户界面和它使用的任何资源，因此用Slint编写的用户界面在性能和存储方面使用的资源很少。
 
-The Slint language enforces a separation of user interface from business logic,
-using interfaces you can define for your project. This enables a fearless
-cooperation between design-focused team members and those concentrating on the programming
-side of the project.
+Slint语言通过为项目定义接口强制实施用户界面与业务逻辑的分离。
+这允许专注于设计的成员和那些专注于项目编程方面的成员之间进行更好的合作。
 
+Slint语言是一种用于描述的，可扩展的图形用户界面的语言，它使用
+`Slint框架 <https://slint.dev>`_
 
-The Slint language describes extensible graphical user interfaces using the
-`Slint framework <https://slint.dev>`_
+- 在窗口中使用文本表示法放置和组合可视元素树。
+- 通过属性配置元素的外观。例如，`Text` 元素具有 `text` 属性，而 `Rectangle` 元素具有 `background` 颜色。
+- 将绑定表达式分配给属性，以自动计算依赖于其他属性的值。
+- 将绑定表达式与命名状态和条件组合在一起。
+- 在用户界面中，通过声明属性和状态的动画效果，使用户界面具有活力。
+- 创建你自己的可重用组件，并在 `.slint` 模块文件中共享它们。
+- 定义数据结构和模型，并从编程语言中访问它们。
+- 使用提供的 :ref:`内置元素 <内置元素>` 和预构建的 :ref:`组件 <组件>` ，构建高度定制的用户界面。
 
-- Place and compose a tree of visual elements in a window using a textual representation.
-- Configure the appearance of elements via properties. For example a `Text` element has a `text`
-  property, while a `Rectangle` element has a `background` color.
-- Assign binding expressions to properties to automatically compute values that depend on other properties.
-- Group binding expressions together with named states and conditions.
-- Declare animations on properties and states to make the user interface feel alive.
-- Build your own re-usable components and share them in `.slint` module files.
-- Define data structures and models and access them from programming languages.
-- Build highly customized user interfaces with the :ref:`builtin elements <Builtin Elements>`
-  and pre-built :ref:`widgets <Widgets>` provided.
-
-It only describes the user interface and it is not a programming language. The business
-logic is written in a different programming language using the Slint API.
+它只描述了用户界面，而不是编程语言。业务逻辑是使用不同的编程语言使用Slint API编写的。

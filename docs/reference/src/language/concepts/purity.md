@@ -1,31 +1,22 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Purity
+# 纯洁性
 
-Slint's property evaluation is lazy and "reactive". Property
-bindings are evaluated when reading the property value. Dependencies between properties are
-automatically discovered during property evaluation. The property stores the
-result of the evaluation. When a property changes, all dependent properties get
-notified, so that the next time their value is read, their binding is re-evaluated.
+Slint的属性评估是惰性和“反应”的。当读取属性值时，将评估属性绑定。
+属性之间的依赖关系在属性评估期间自动发现。属性存储评估的结果。
+当属性更改时，所有依赖属性都会收到通知，以便在下一次读取其值时，将重新评估其绑定。
 
-For any reactive system to work well, evaluating a property shouldn't change any
-observable state but the property itself. If this is the case, then the expression
-is "pure", otherwise it's said to have side-effects. Side-effects are problematic
-because it's not always clear when they will happen: Lazy evaluation may change
-their order or affect whether they happen at all. In addition, changes to
-properties during their binding evaluation due to a side-effect may result in
-unexpected behavior.
+对于任何响应式系统，评估属性都不应该改变任何可观察状态，除了属性本身。
+如果是这样，那么表达式是“纯粹的”，否则就是有副作用的。
+副作用是有问题的，因为它们何时发生并不总是清楚：惰性评估可能会改变它们的顺序或影响它们是否发生。
+此外，由于副作用导致的绑定评估期间属性的更改可能会导致意外的行为。
 
-For this reason, bindings in Slint _must_ be pure. The Slint compiler enforces
-code in pure contexts to be free of side effects. Pure contexts include binding
-expressions, bodies of pure functions, and bodies of pure callback handlers.
-In such a context, it's not allowed to change a property, or call a non-pure
-callback or function.
+因此，Slint中的绑定必须是纯粹的。Slint编译器强制执行纯上下文中的代码不含副作用。
+纯上下文包括绑定表达式、纯函数的主体和纯回调处理程序的主体。
+在这样的上下文中，不允许更改属性，或者调用非纯回调或函数。
 
-Annotate callbacks and public functions with the `pure` keyword to make them
-accessible from property bindings and other pure callbacks and functions.
+使用 `pure` 关键字注释回调和公共函数，使它们可以从属性绑定和其他纯回调和函数中访问。
 
-The purity of private functions is automatically inferred. You may declare
-private functions explicitly "pure" to have the compiler enforce their purity.
+私有函数的纯洁性会自动推断。您可以显式地声明私有函数为“纯”的，以使编译器强制执行它们的纯洁性。
 
 ```slint,no-preview
 export component Example {

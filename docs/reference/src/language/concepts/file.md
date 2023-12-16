@@ -1,14 +1,13 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# The `.slint` File
+# `.slint` 文件
 
-User interfaces are written in the Slint language and saved in files with the `.slint` extension.
+用户界面是用Slint语言编写的，并且以`.slint`扩展名保存在文件中。
 
-Each `.slint` file defines one or several components. These components declare
-a tree of elements. Components form the basis of composition in Slint. Use them
-to build your own re-usable set of UI controls. You can use each declared
-component under its name as an element in another component.
+每个`.slint`文件可以定义了一个或多个组件。这些组件声明了一组元素树。组件是Slint中组合的基础。
+使用它们来构建你自己的可重用UI控件集。
+你可以使用每个声明的组件在其名称下作为另一个组件的元素。
 
-Below is an example of components and elements:
+以下是组件和元素的例子：
 
 ```slint
 
@@ -38,15 +37,12 @@ export component MyApp inherits Window {
 
 ```
 
-Both `MyButton` and `MyApp` are components. `Window` and `Rectangle` are built-in elements
-used by `MyApp`. `MyApp` also re-uses the `MyButton` component as two separate elements.
+在这个场景中，我们有两个组件：`MyButton` 和 `MyApp`。`MyApp` 使用了内置元素 `Window` 和 `Rectangle`。
+此外，`MyApp` 还重用了 `MyButton` 组件作为两个独立的元素。
 
-Elements have properties, which you can assign values to. Here we assign a string
-constant "hello" to the first `MyButton`'s `text` property. You
-can also assign entire expressions. Slint will re-evaluate the expressions when any
-of the properties they depend on change, which makes the user-interface reactive.
+元素具有属性，你可以为这些属性分配值。在这里，我们将一个字符串常量 "hello" 分配给第一个 `MyButton` 的 `text` 属性。你也可以分配整个表达式。当这些属性所依赖的任何属性发生变化时，Slint 将重新计算这些表达式，从而使用户界面具有响应性。
 
-You can name elements using the `:=` syntax:
+你可以使用`:=`语法来命名元素。
 
 ```slint
 component MyButton inherits Text {
@@ -68,13 +64,12 @@ export component MyApp inherits Window {
     }
 }
 ```
+命名必须是有效的 [标识符](../syntax/identifiers.md)。
 
-Names have to be valid [identifiers](../syntax/identifiers.md).
+某些元素也可以通过预定义的名称进行访问：
 
-Some elements are also accessible under pre-defined names:
+- `root` 指向组件的最外层元素。
+- `self` 指向当前元素。
+- `parent` 指向当前元素的父元素。
 
--   `root` refers to the outermost element of a component.
--   `self` refers to the current element.
--   `parent` refers to the parent element of the current element.
-
-These names are reserved and you can't re-define them.
+这些名称是保留的，你不能重新定义它们。

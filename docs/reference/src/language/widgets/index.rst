@@ -1,7 +1,7 @@
 .. Copyright © SixtyFPS GmbH <info@slint.dev>
 .. SPDX-License-Identifier: MIT
 
-Widgets
+组件
 ========
 
 .. include:: widgets.md
@@ -10,7 +10,7 @@ Widgets
 .. toctree::
    :hidden:
    :maxdepth: 4
-   :caption: Widgets
+   :caption: 组件
 
    aboutslint.md
    button.md

@@ -1,13 +1,13 @@
 .. Copyright © SixtyFPS GmbH <info@slint.dev>
 .. SPDX-License-Identifier: MIT
 
-Concepts
+基础概念
 ========
 
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Concepts
+   :caption: 基础概念
 
    file.md
    layouting.md

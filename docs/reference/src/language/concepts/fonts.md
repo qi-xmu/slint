@@ -1,18 +1,17 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Font Handling
 
-Elements such as `Text` and `TextInput` can render text and allow customizing the appearance of the text through
-different properties. The properties prefixed with `font-`, such as `font-family`, `font-size` and `font-weight`
-affect the choice of font used for rendering to the screen. If any of these properties isn't specified, the `default-font-`
-values in the surrounding `Window` element apply, such as `default-font-family`.
+# 字体处理
 
-The fonts chosen for rendering are automatically picked up from the system. It's also possible to include custom
-fonts in your design. A custom font must be a TrueType font (`.ttf`), a TrueType font collection (`.ttc`) or an OpenType font (`.otf`).
-You can select a custom font with the `import` statement: `import "./my_custom_font.ttf"` in a .slint file. This
-instructions the Slint compiler to include the font and makes the font families globally available for use with
-`font-family` properties.
+诸如 `Text` 和 `TextInput` 之类的元素可以呈现文本，并允许通过不同的属性自定义文本的外观。
+以 `font-` 为前缀的属性，例如 `font-family`，`font-size` 和 `font-weight` 影响用于渲染到屏幕的字体的选择。
+如果没有指定这些属性中的任何一个，则周围 `Window` 元素中的 `default-font-` 值将应用，例如 `default-font-family`。
 
-For example:
+所选用于渲染的字体会自动从系统中获取。您也可以在设计中包含自定义字体。
+自定义字体必须是 TrueType 字体（`.ttf`），TrueType 字体集（`.ttc`）或 OpenType 字体（`.otf`）。
+您可以在 .slint 文件中使用 `import` 语句选择自定义字体：`import "./my_custom_font.ttf"`。
+这会指示 Slint 编译器包含字体，并使字体系列在 `font-family` 属性中全局可用。
+
+例如：
 
 ```slint,ignore
 import "./NotoSans-Regular.ttf";

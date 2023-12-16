@@ -7,7 +7,7 @@
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Introduction
+   :caption: 概述
 
    src/introduction/index.rst
    src/introduction/supported_platforms.md
@@ -15,7 +15,7 @@
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Language Reference
+   :caption: 语言参考
 
    src/language/index.rst
    src/language/concepts/index.rst
@@ -26,14 +26,14 @@
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Recipes & Examples
+   :caption: 技巧 & 示例
 
    src/recipes/recipes.md
 
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Advanced Topics
+   :caption: 高级主题
 
    src/advanced/debugging_techniques.md
    src/advanced/style.md

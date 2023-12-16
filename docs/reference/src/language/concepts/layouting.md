@@ -1,32 +1,26 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Positioning and Layout of Elements
+# 定位和元素布局
 
-All visual elements are shown in a window. The `x` and `y` properties store
-the elements coordinates relative to their parent element. Slint determines the
-absolute position of an element by adding the parent's position to
-the element's position. If the parent has a parent element itself, then that one
-is added as well. This calculation continues until the top-level element
-is reached.
+所有的视觉元素都显示在一个窗口中。`x` 和 `y` 属性存储了元素相对于其父元素的坐标。
+Slint 通过将父元素的位置添加到元素的位置来确定元素的绝对位置。
+如果父元素本身有父元素，那么也会添加到父元素中。这个计算会一直持续到达到顶层元素。
 
-The `width` and `height` properties store the size of visual elements.
+`width` 和 `height` 属性存储了视觉元素的大小。
 
-You can create an entire graphical user interface by placing the elements in
-two ways:
+您可以通过两种方式将元素放置在一个完整的图形用户界面中：
 
--   Explicitly - by setting the `x`, `y`, `width`, and `height` properties.
--   Automatically - by using layout elements.
+-   显式 - 通过设置 `x`，`y`，`width` 和 `height` 属性。
+-   自动 - 使用布局元素。
 
-Explicit placement is great for static scenes with few elements. Layouts are
-suitable for complex user interfaces and help create scalable user interfaces.
-Layout elements express geometric relationships between elements.
+显式放置适用于具有少量元素的静态场景。布局适用于复杂的用户界面，并帮助创建可扩展的用户界面。
+布局元素表达了元素之间的几何关系。
 
-## Explicit Placement
+## 显式放置
 
-The following example places two rectangles into a window, a blue one and
-a green one. The green rectangle is a child of the blue:
+下面的示例将两个矩形放置在一个窗口中，一个蓝色的和一个绿色的。绿色的矩形是蓝色的子元素：
 
 ```slint
-// Explicit positioning
+// 显式定位
 export component Example inherits Window {
     width: 200px;
     height: 200px;
@@ -47,53 +41,47 @@ export component Example inherits Window {
 }
 ```
 
-The positions of both rectangles and the size of the inner green one are fixed.
-The outer blue rectangle has a size that's automatically calculated using binding
-expressions for the `width` and `height` properties. The calculation results in the
-bottom left corner aligning with the corner of the window - it updates whenever
-the `width` and `height` of the window changes.
+两个矩形的位置和内部绿色矩形的大小是固定的。
+外部蓝色矩形的大小是使用绑定表达式自动计算的 `width` 和 `height` 属性。
+计算结果是底部左侧的角与窗口的角对齐 —— 它在窗口的 `width` 和 `height` 改变时更新。
 
-When specifying explicit values for any of the geometric properties, Slint requires
-you to attach a unit to the number. You can choose between two different units:
+当指定几何属性的任何一个时，Slint 要求您将单位附加到数字。您可以在两个不同的单位之间进行选择：
 
--   Logical pixels, using the `px` unit suffix. This is the recommended unit.
--   Physical pixels, using the `phx` unit suffix
+-   逻辑像素，使用 `px` 单位后缀。这是推荐的单位。
+-   物理像素，使用 `phx` 单位后缀
 
-Logical pixels scale automatically with the device pixel ratio that your system is
-configured with. For example, on a modern High-DPI display the device pixel ratio can be 2,
-so every logical pixel occupies 2 physical pixels. On an older screen the user
-interface scales without any adaptations.
+逻辑像素会自动缩放，以适应系统配置的设备像素比率。
+例如，在现代的高 DPI 显示器上，设备像素比率可以是 2，因此每个逻辑像素占用 2 个物理像素。
+在旧屏幕上，用户界面会自动缩放而不需要任何适应。
 
-Additionally, the `width` and `height` properties can also be specified as a `%` percentage
-unit, which applies relative to the parent element. For example a `width: 50%` means half
-of the parent's `width`.
+此外，`width` 和 `height` 属性也可以指定为 `%` 百分比单位，该单位相对于父元素应用。
+例如，`width: 50%` 表示父元素的一半。
 
-The default values for `x` and `y` properties are such that elements are centered within their
-parent.
+`x` 和 `y` 属性的默认值是使元素在其父元素内居中。
 
-The default values for `width` and `height` depend on the type of element. Some elements are sized
-automatically based on their content, such as `Image`, `Text`, and most widgets. The following elements
-don't have content and default to fill their parent element when they do not have children:
+`width` 和 `height` 的默认值取决于元素的类型。
+一些元素根据其内容自动调整大小，例如 `Image`，`Text` 和大多数小部件。
+
+以下元素没有内容，当它们没有子元素时，默认填充其父元素：
 
 -   `Rectangle`
 -   `TouchArea`
 -   `FocusScope`
 -   `Flickable`
 
-Layouts are also defaulting to fill the parent, regardless of their own preferred size.
+布局元素也默认填充父元素，而不管它们自己的首选大小。
 
-Other elements (including custom ones without base) default to using their preferred size.
+其他元素（包括没有基类的自定义元素）默认使用其首选大小。
 
-### Preferred size
+### 首选大小
 
-The preferred size of elements can be specified with the `preferred-width` and `preferred-height` properties.
+元素的首选大小可以使用 `preferred-width` 和 `preferred-height` 属性指定。
 
-When not explicitly set, the preferred size depends on the children, and is the preferred size of the
-child that has the bigger preferred size, whose `x` and `y` property are not set.
-The preferred size is therefore computed from the child to the parent, just like other constraints (maximum and minimum size), unless explicitly overwritten.
+当没有显式设置时，首选大小取决于子元素，并且是具有更大首选大小的子元素的首选大小，其 `x` 和 `y` 属性未设置。
+因此，首选大小是从子元素到父元素计算的，就像其他约束（最大和最小大小）一样，除非显式覆盖。
 
-A special case is to set the preferred size to be the size of the parent using `100%` as value.
-For example,this component will use the size of the parent by default:
+一个特殊的情况是将首选大小设置为父元素的大小，使用 `100%` 作为值。
+例如，这个组件将默认使用父元素的大小：
 
 ```slint
 component MyComponent {
@@ -103,18 +91,16 @@ component MyComponent {
 }
 ```
 
-## Automatic Placement Using Layouts
+## 使用布局自动放置
 
-Slint comes with different layout elements that automatically calculate the position and size of their children:
+Slint 附带了不同的布局元素，它们自动计算其子元素的位置和大小：
 
--   `VerticalLayout` / `HorizontalLayout`: The children are placed along the vertical or horizontal axis.
--   `GridLayout`: The children are placed in a grid of columns and rows.
+-   `VerticalLayout` / `HorizontalLayout`：子元素沿垂直或水平轴放置。
+-   `GridLayout`：子元素在列和行的网格中放置。
 
-You can also nest layouts to create complex user interfaces.
+您还可以嵌套布局以创建复杂的用户界面。
 
-You can tune the automatic placement using different constraints, to accommodate the design of your user
-interface. Each element has a minimum, a maximum size, and a preferred size. Set these explicitly using the
-following properties:
+你可以使用不同的约束条件来调整自动布局，以适应你的用户界面设计。每个元素都有一个最小尺寸、一个最大尺寸和一个首选尺寸。通过以下属性明确设置这些尺寸：
 
 -   `min-width`
 -   `min-height`
@@ -123,47 +109,39 @@ following properties:
 -   `preferred-width`
 -   `preferred-height`
 
-Any element with a specified `width` and `height` has a fixed size in a layout.
+在布局中，具有指定 `width` 和 `height` 的任何元素都具有固定的大小。
 
-When there is extra space in a layout, elements can stretch along the layout axis. You can control this stretch
-factor between the element and its siblings with these properties:
+在布局中有额外的空间时，元素可以沿着布局轴拉伸。您可以使用以下属性在元素和其兄弟元素之间控制此拉伸因子：
 
 -   `horizontal-stretch`
 -   `vertical-stretch`
 
-A value of `0` means that the element won't stretch at all. All elements stretch
-equally if they all have a stretch factor of `0`.
+值为 `0` 表示元素不会拉伸。如果它们都有一个拉伸因子为 `0`，则所有元素都会均匀拉伸。
 
-The default value of these constraint properties may depends on the content of the element.
-If the element's `x` or `y` isn't set, these constraints are also automatically
-applied to the parent element.
+这些约束属性的默认值可能取决于元素的内容。如果元素的 `x` 或 `y` 没有设置，这些约束也会自动应用到父元素。
 
-## Common Properties on Layout Elements
+## 布局元素上的常见属性
 
-All layout elements have the following properties in common:
+所有布局元素都具有以下共同属性：
 
--   `spacing`: This controls the spacing between the children.
--   `padding`: This specifies the padding within the layout, the space between the elements and the border of the
-    layout.
+-   `spacing`：这控制子元素之间的间距。
+-   `padding`：这指定了布局内的填充，元素和布局边框之间的空间。
 
-For more fine grained control, the `padding` property can be split into properties for each side of the layout:
+为了更细粒度的控制，`padding` 属性可以分割为布局的每一边的属性：
 
 -   `padding-left`
 -   `padding-right`
 -   `padding-top`
 -   `padding-bottom`
 
-## `VerticalLayout` and `HorizontalLayout`
+## `VerticalLayout` 和 `HorizontalLayout`
 
-The `VerticalLayout` and `HorizontalLayout` elements place their children in a
-column or a row. By default, they stretch or shrink to take the whole space. You
-can adjust the element's alignment as needed.
+`VerticalLayout` 和 `HorizontalLayout` 元素将其子元素放置在列或行中。默认情况下，它们会拉伸或收缩以占用整个空间。您可以根据需要调整元素的对齐方式。
 
-The following example places the blue and yellow rectangle in a row and evenly stretched
-across the 200 logical pixels of `width`:
+下面的示例将蓝色和黄色矩形放置在一行中，并均匀地拉伸到 `width` 的 200 个逻辑像素：
 
 ```slint
-// Stretch by default
+// 默认拉伸
 export component Example inherits Window {
     width: 200px;
     height: 200px;
@@ -174,12 +152,11 @@ export component Example inherits Window {
 }
 ```
 
-The example below, on the other hand, specifies that the rectangles shall align
-to the start of the layout (the visual left). That results in no stretching but instead
-the rectangles retain their specified minimum width:
+在下面的示例中，另一方面，指定矩形应与布局的起始位置（视觉上的左侧）对齐。
+这样就不会拉伸矩形，而是保留其指定的最小宽度：
 
 ```slint
-// Unless an alignment is specified
+// 除非指定了对齐方式
 export component Example inherits Window {
     width: 200px;
     height: 200px;
@@ -191,19 +168,19 @@ export component Example inherits Window {
 }
 ```
 
-The example below nests two layouts for a more complex scene:
+下面的示例嵌套了两个布局以获得更复杂的场景：
 
 ```slint
 export component Example inherits Window {
     width: 200px;
     height: 200px;
     HorizontalLayout {
-        // Side panel
+        // 侧面板
         Rectangle { background: green; width: 10px; }
 
         VerticalLayout {
             padding: 0px;
-            //toolbar
+            // 工具栏
             Rectangle { background: blue; height: 7px; }
 
             Rectangle {
@@ -225,16 +202,13 @@ export component Example inherits Window {
 }
 ```
 
-### Alignment
+### 对齐
 
-Each element is sized according to their `width` or `height` if specified, otherwise it's
-set to the minimum size which is set with the min-width or min-height property, or
-the minimum size of an inner layout, whatever is bigger.
+每个元素的大小是根据其 `width` 或 `height` 来设定的，如果这些属性被指定了的话。如果没有指定，那么它的大小会被设置为最小尺寸，这个最小尺寸是通过 `min-width` 或 `min-height` 属性来设定的，或者是通过内部布局的最小尺寸来设定的，取两者中较大的那个值作为元素的最终大小。
 
-The elements are placed according to the alignment. The size of elements
-is bigger than the minimum size only if the `alignment` property of the layout is `LayoutAlignment.stretch` (the default)
+元素根据对齐方式放置。元素的大小只有在布局的 `alignment` 属性为 `LayoutAlignment.stretch`（默认值）时才会大于最小尺寸。
 
-This example show the different alignment possibilities
+这个例子展示了不同的对齐方式：
 
 ```slint
 export component Example inherits Window {
@@ -287,17 +261,12 @@ export component Example inherits Window {
 }
 ```
 
-### Stretch algorithm
+### 拉伸算法
 
-When the `alignment` is set to stretch (the default), the elements are sized to their minimum size,
-then the extra space is shared amongst element proportional to their stretch factor set with the
-`horizontal-stretch` and `vertical-stretch` properties. The stretched size won't exceed the maximum size.
-The stretch factor is a floating point number. The elements that have a default content size usually defaults to 0
-while elements that default to the size of their parents defaults to 1.
-An element of a stretch factor of 0 will keep its minimum size, unless all the other elements also have a stretch
-factor of 0 or reached their maximum size.
+当 `alignment` 设置为 `stretch`（默认值）时，元素被调整为其最小尺寸，然后额外的空间按照其拉伸因子进行比例分配，这个拉伸因子是通过 `horizontal-stretch` 和 `vertical-stretch` 属性来设定的。拉伸后的大小不会超过最大尺寸。拉伸因子是一个浮点数。那些默认内容大小的元素通常默认为 0，而那些默认为其父元素大小的元素通常默认为 1。
+拉伸因子为 0 的元素将保持其最小尺寸，除非所有其他元素的拉伸因子也为 0 或达到其最大尺寸。
 
-Examples:
+例子：
 
 ```slint
 export component Example inherits Window {
@@ -333,7 +302,7 @@ export component Example inherits Window {
 
 ### `for`
 
-The VerticalLayout and Horizontal layout may also contain `for` or `if` expressions:
+`VerticalLayout` 和 `HorizontalLayout` 也可以包含 `for` 或 `if` 表达式：
 
 ```slint
 export component Example inherits Window {
@@ -349,16 +318,14 @@ export component Example inherits Window {
 }
 ```
 
-## GridLayout
+## 网格布局
 
-The GridLayout lays the element in a grid.
-Each element gains the properties `row`, `col`, `rowspan`, and `colspan`.
-One can either use a `Row` sub-element, or set the `row` property explicitly.
-These properties must be statically known at compile time, so it's impossible
-to use arithmetic or depend on properties. As of now, the use of `for` or `if`
-isn't allowed in a grid layout.
+网格布局将元素放置在网格中。
+每个元素都获得属性 `row`，`col`，`rowspan` 和 `colspan`。
+可以使用 `Row` 子元素，也可以显式设置 `row` 属性。
+这些属性必须在编译时静态知道，因此不可能使用算术或依赖于属性。截至目前，不允许在网格布局中使用 `for` 或 `if`。
 
-This example use the `Row` element
+这个例子使用 `Row` 元素
 
 ```slint
 export component Foo inherits Window {
@@ -378,7 +345,7 @@ export component Foo inherits Window {
 }
 ```
 
-This example use the `col` and `row` property
+这个例子使用 `row` 和 `col` 属性
 
 ```slint
 export component Foo inherits Window {

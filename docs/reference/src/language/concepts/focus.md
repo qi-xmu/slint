@@ -1,11 +1,10 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Focus Handling
+# 聚焦处理
 
-Certain elements such as `TextInput` accept not only input from the mouse/finger but
-also key events originating from (virtual) keyboards. In order for an item to receive
-these events, it must have the focus. This is visible through the `has-focus` (out) property.
+某些元素，例如 `TextInput` 不仅接受鼠标/手指的输入，还接受来自（虚拟）键盘的按键事件。
+为了让一个元素接收这些事件，它必须有焦点。这可以通过 `has-focus`（输出）属性来看到。
 
-You can manually activate the focus on an element by calling `focus()`:
+您可以通过调用 `focus()` 来手动激活元素上的焦点：
 
 ```slint
 import { Button } from "std-widgets.slint";
@@ -24,8 +23,7 @@ export component App inherits Window {
 }
 ```
 
-If you have wrapped the `TextInput` in a component, then you can forward such a focus activation
-using the `forward-focus` property to refer to the element that should receive it:
+如果您的 `TextInput` 元素在组件中，那么您可以使用 `forward-focus` 属性来引用应该接收焦点的元素：
 
 ```slint
 import { Button } from "std-widgets.slint";
@@ -52,5 +50,4 @@ export component App inherits Window {
 }
 ```
 
-If you use the `forward-focus` property on a `Window`, then the specified element will receive
-the focus the first time the window receives the focus - it becomes the initial focus element.
+如果你使用 `forward-focus` 属性在一个 `Window` 上，那么指定的元素将在窗口第一次获得焦点时接收焦点 —— 它成为初始焦点元素。

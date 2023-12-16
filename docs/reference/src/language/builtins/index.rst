@@ -1,18 +1,16 @@
 .. Copyright © SixtyFPS GmbH <info@slint.dev>
 .. SPDX-License-Identifier: MIT
 
-Builtins
+内置
 ========
 
 .. toctree::
    :hidden:
    :maxdepth: 4
-   :caption: Builtins
+   :caption: 内置
 
    callbacks.md
    elements.md
-   enums.md
    functions.md
    globals.md
    namespaces.md
-   structs.md
