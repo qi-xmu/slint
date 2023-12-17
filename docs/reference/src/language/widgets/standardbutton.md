@@ -1,21 +1,20 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `StandardButton`
 
-The StandardButton looks like a button, but instead of customizing with `text` and `icon`,
-it can used one of the pre-defined `kind` and the text and icon will depend on the style.
+`StandardButton` 看起来像一个按钮，但是不是用 `text` 和 `icon` 自定义的，它可以使用一个预定义的 `kind`，文本和图标将取决于样式。
 
-### Properties
+### 属性
 
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, the button can't be pressed
--   **`has-focus`**: (_out_ _bool_): Set to true when the button currently has the focus
--   **`kind`** (_in_ _enum [`StandardButtonKind`](../builtins/enums.md#standardbuttonkind)_): The kind of button, one of `ok` `cancel`, `apply`, `close`, `reset`, `help`, `yes`, `no,` `abort`, `retry` or `ignore`
--   **`pressed`**: (_out_ _bool_): Set to true when the button is pressed.
+-   **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，按钮无法被按下
+-   **`has-focus`**: (_out_ _bool_): 当按钮有键盘焦点时设置为 true
+-   **`kind`** (_in_ _enum [`StandardButtonKind`](../builtins/enums.md#standardbuttonkind)_): 按钮的类型，其中之一为 `ok` `cancel`, `apply`, `close`, `reset`, `help`, `yes`, `no,` `abort`, `retry` 或 `ignore`
+-   **`pressed`**: (_out_ _bool_): 当按钮被按下时设置为 true。
 
-### Callbacks
+### 回调
 
 -   **`clicked()`**
 
-### Example
+### 示例
 
 ```slint
 import { StandardButton, VerticalBox } from "std-widgets.slint";

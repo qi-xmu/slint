@@ -1,7 +1,6 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `VerticalBox`
 
-A `VerticalBox` is a [`VerticalLayout`](../builtins/elements.md#verticallayout-and-horizontallayout) where the spacing and padding values
-depend on the style instead of defaulting to 0.
+`VerticalBox`是一个[`VerticalLayout`](../builtins/elements.md#verticallayout-and-horizontallayout)，其中的间距和填充值取决于样式，而不是默认为 0。
 
-See also [`HorizontalBox`](horizontalbox.md).
+参见 [`HorizontalBox`](horizontalbox.md)。

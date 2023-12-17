@@ -1,18 +1,17 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `TabWidget`
 
-`TabWidget` is a container for a set of tabs. It can only have `Tab` elements as children and only one tab will be visible at
-a time.
+`TabWidget` 是一组选项卡的容器。它只能有 `Tab` 元素作为子元素，一次只能有一个选项卡可见。
 
-### Properties
+### 属性
 
--   **`current-index`** (_in_ _int_): The index of the currently visible tab
+-   **`current-index`** (_in_ _int_): 当前可见选项卡的索引
 
-### Properties of the `Tab` element
+### `Tab` 元素的属性
 
--   **`title`** (_in_ _string_): The text written on the tab
+-   **`title`** (_in_ _string_): 标签上的文本
 
-### Example
+### 示例
 
 ```slint
 import { TabWidget } from "std-widgets.slint";

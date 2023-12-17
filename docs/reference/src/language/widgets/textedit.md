@@ -1,35 +1,34 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `TextEdit`
 
-Similar to [`LineEdit`](#lineedit)`, but can be used to enter several lines of text
+和[`LineEdit`](#lineedit)`类似，但可以用来输入多行文本。
 
-_Note:_ The current implementation only implement very few basic shortcut. More
-shortcut will be implemented in a future version: <https://github.com/slint-ui/slint/issues/474>
+_注意：_当前的实现只实现了很少的基本快捷键。更多的快捷键将在未来的版本中实现：<https://github.com/slint-ui/slint/issues/474>
 
-### Properties
+### 属性
 
--   **`font-size`** (_in_ _length_): the size of the font of the input text
--   **`text`** (_in-out_ _string_): The text being edited
--   **`has-focus`**: (_in_out_ _bool_): Set to true when the widget currently has the focus
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, nothing can be entered
--   **`read-only`** (_in_ _bool_): When set to true, text editing via keyboard and mouse is disabled but selecting text is still enabled as well as editing text programmatically (default value: `false`)
--   **`wrap`** (_in_ _enum [`TextWrap`](../builtins/enums.md#textwrap)_): The way the text wraps (default: word-wrap).
--   **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](../builtins/enums.md#texthorizontalalignment)_): The horizontal alignment of the text.
+- **`font-size`** (_in_ _length_): 输入文本的字体大小
+- **`text`** (_in-out_ _string_): 正在编辑的文本
+- **`has-focus`**: (_in_out_ _bool_): 当前小部件是否有焦点
+- **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，不能输入任何内容
+- **`read-only`** (_in_ _bool_): 当设置为 true 时，禁用通过键盘和鼠标编辑文本，但选择文本仍然可用以及以编程方式编辑文本（默认值：`false`）
+- **`wrap`** (_in_ _enum [`TextWrap`](../builtins/enums.md#textwrap)_): 文本换行方式（默认值：`word-wrap`）。
+- **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](../builtins/enums.md#texthorizontalalignment)_): 文本的水平对齐方式。
 
-### Functions
+### 函数
 
--   **`focus()`** Call this function to focus the TextEdit and make it receive future keyboard events.
--   **`select-all()`** Selects all text.
--   **`clear-selection()`** Clears the selection.
--   **`copy()`** Copies the selected text to the clipboard.
--   **`cut()`** Copies the selected text to the clipboard and removes it from the editable area.
--   **`paste()`** Pastes the text content of the clipboard at the cursor position.
+- **`focus()`** 调用此函数以聚焦 TextEdit 并使其接收未来的键盘事件。
+- **`select-all()`** 选择所有文本。
+- **`clear-selection()`** 清除选择。
+- **`copy()`** 将选定的文本复制到剪贴板。
+- **`cut()`** 将选定的文本复制到剪贴板并从可编辑区域中删除它。
+- **`paste()`** 将剪贴板的文本内容粘贴到光标位置。
 
-### Callbacks
+### 回调
 
--   **`edited(string)`**: Emitted when the text has changed because the user modified it
+- **`edited(string)`**: 当用户修改文本时发出文本已更改
 
-### Example
+### 示例
 
 ```slint
 import { TextEdit } from "std-widgets.slint";

@@ -1,15 +1,14 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `ListView`
 
-A ListView is like a Scrollview but it should have a `for` element, and the content are
-automatically laid out in a list.
-Elements are only instantiated if they are visible
+一个 `ListView` 就像一个 [`ScrollView`](#scrollview)，但是它应该有一个 `for` 元素，而且内容是自动在列表中布局的。
+元素只有在可见时才会被实例化。
 
-### Properties
+### 属性
 
-Same as [`ScrollView`](#scrollview)
+与 [`ScrollView`](#scrollview) 相同
 
-### Example
+### 示例
 
 ```slint
 import { ListView } from "std-widgets.slint";

@@ -1,5 +1,4 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `GridBox`
 
-A `GridBox` is a [`GridLayout`](../builtins/elements.md#gridlayout) where the spacing and padding values
-depend on the style instead of defaulting to 0.
+一个 `GridBox` 是一个 [`GridLayout`](../builtins/elements.md#gridlayout)，其中的间距和填充值取决于样式，而不是默认为 0。

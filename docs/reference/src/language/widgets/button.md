@@ -1,25 +1,25 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `Button`
 
-A simple button. Common types of buttons can also be created with [`StandardButton`](#standardbutton).
+一个简单的按钮。常见的按钮类型也可以用 [`StandardButton`](#standardbutton) 创建。
 
-### Properties
+### 属性
 
--   **`checkable`** (_in_ _bool_): Shows whether the button can be checked or not. This enables the `checked` property to possibly become true.
--   **`checked`** (_inout_ _bool_): Shows whether the button is checked or not. Needs `checkable` to be true to work.
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, the button cannot be pressed
--   **`has-focus`**: (_out_ _bool_): Set to true when the button has keyboard focus.
--   **`icon`** (_in_ _image_): The image to show in the button. Note that not all styles support drawing icons.
--   **`pressed`**: (_out_ _bool_): Set to true when the button is pressed.
--   **`text`** (_in_ _string_): The text written in the button.
--   **`primary`** (_in_ _bool_): If set to true the button is displayed with the primary accent color (default: false).
--  **`colorize-icon`** (_in_ _bool_): If set to true, the icon will be colorized to the same color as the Button's text color. (default: false)
+-   **`checkable`** (_in_ _bool_): 显示按钮是否可以被选中。这使得 `checked` 属性可能变为 true。
+-   **`checked`** (_inout_ _bool_): 显示按钮是否被选中。需要 `checkable` 为 true 才能工作。
+-   **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，按钮无法被按下
+-   **`has-focus`**: (_out_ _bool_): 当按钮有键盘焦点时设置为 true。
+-   **`icon`** (_in_ _image_): 在按钮中显示的图像。请注意，并非所有样式都支持绘制图标。
+-   **`pressed`**: (_out_ _bool_): 当按钮被按下时设置为 true。
+-   **`text`** (_in_ _string_): 按钮中的文本。
+-   **`primary`** (_in_ _bool_): 如果设置为 true，则使用主要强调色显示按钮（默认值：false）。
+-   **`colorize-icon`** (_in_ _bool_): 如果设置为 true，则图标将被着色为与 Button 的文本颜色相同的颜色。 (默认值：false)
 
-### Callbacks
+### 回调
 
 -   **`clicked()`**
 
-### Example
+### 示例
 
 ```slint
 import { Button, VerticalBox } from "std-widgets.slint";

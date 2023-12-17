@@ -1,20 +1,20 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `Slider`
 
-### Properties
+### 属性
 
--   **`enabled`**: (_in_ _bool_): Defaults to true. You can't interact with the slider if enabled is false.
--   **`has-focus`**: (_out_ _bool_): Set to true when the slider currently has the focus
--   **`value`** (_in-out_ _float_): The value.
--   **`minimum`** (_in_ _float_): The minimum value (default: 0)
--   **`maximum`** (_in_ _float_): The maximum value (default: 100)
--   **`orientation`** (_in_ _enum [`Orientation`](../builtins/enums.md#orientation)_): If set to true the Slider is displayed vertical (default: horizontal).
+-   **`enabled`**：（_in_ _bool_）：默认为 true。如果启用为 false，则无法与滑块交互。
+-   **`has-focus`**：（_out_ _bool_）：当滑块当前具有焦点时设置为 true
+-   **`value`**（_inout_ _float_）：值。
+-   **`minimum`**（_in_ _float_）：最小值（默认值：0）
+-   **`maximum`**（_in_ _float_）：最大值（默认值：100）
+-   **`orientation`**（_in_ _enum [`Orientation`](../builtins/enums.md#orientation)_）：如果设置为 true，则以垂直方式显示滑块（默认值：水平）。
 
-### Callbacks
+### 回调
 
--   **`changed(float)`**: The value was changed
+-   **`changed(float)`**：值已更改
 
-### Example
+### 示例
 
 ```slint
 import { Slider } from "std-widgets.slint";

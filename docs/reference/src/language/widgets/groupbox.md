@@ -2,14 +2,14 @@
 
 ## `GroupBox`
 
-A `GroupBox` is a container that groups its children together under a common title.
+`GroupBox` 是一个容器，它将其子元素组合在一个共同的标题下。
 
-### Properties
+### 属性
 
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, the groupbox can't be interacted with
--   **`title`** (_in_ _string_): A text written as the title of the group box.
+-   **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，组框无法被按下
+-   **`title`** (_in_ _string_): 作为组框标题的文本。
 
-### Example
+### 示例
 
 ```slint
 import { GroupBox , VerticalBox, CheckBox } from "std-widgets.slint";

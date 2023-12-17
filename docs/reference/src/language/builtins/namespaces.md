@@ -1,30 +1,27 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
+# 内置命名空间
 
-# Builtin Namespaces
-
-The following namespaces provide access to common constants such as special keys or named colors.
+以下命名空间提供对常见常量的访问，例如特殊键或命名颜色。
 
 ## `Colors`
 
-Use the colors namespace to select colors by their name. For example you can use `Colors.aquamarine` or `Colors.bisque`.
-The entire list of names is very long. You can find a complete list in the [CSS Specification](https://www.w3.org/TR/css-color-3/#svg-color).
+使用颜色命名空间按名称选择颜色。例如，您可以使用 `Colors.aquamarine` 或 `Colors.bisque`。
+完整的名称列表非常长。您可以在 [CSS 规范](https://www.w3.org/TR/css-color-3/#svg-color) 中找到完整的列表。
 
-These functions are available both in the global scope, and in the `Colors` namespace.
+这些函数在全局范围内和 `Colors` 命名空间中都可用。
 
 -   **`rgb(int, int, int) -> color`**, **`rgba(int, int, int, float) -> color`**
 
-Return the color as in CSS. Like in CSS, these two functions are actually aliases that can take
-three or four parameters.
+返回 CSS 中的颜色。与 CSS 不同，这两个函数实际上是可以接受三个或四个参数的别名。
 
-The first 3 parameters can be either number between 0 and 255, or a percentage with a `%` unit.
-The fourth value, if present, is an alpha value between 0 and 1.
+前 3 个参数可以是介于 0 和 255 之间的数字，也可以是带有 `%` 单位的百分比。
+如果存在第四个值，则为介于 0 和 1 之间的 alpha 值。
 
-Unlike in CSS, the commas are mandatory.
+与 CSS 不同，逗号是必需的。
 
 ## `Key`
 
-Use the constants in the `Key` namespace to handle pressing of keys that don't have a printable character. Check the value of [`KeyEvent`](structs.md#keyevent)'s `text` property
-against the constants below.
+使用 `Key` 命名空间中的常量来处理没有可打印字符的键的按下。检查 [`KeyEvent`](structs.md#keyevent) 的 `text` 属性的值与下面的常量。
 
 -   **`Backspace`**
 -   **`Tab`**
@@ -82,46 +79,45 @@ against the constants below.
 
 ## `Math`
 
-These functions are available both in the global scope and in the `Math` namespace.
+使用 `Math` 命名空间中的函数来执行数学运算。这些函数在全局范围内和 `Math` 命名空间中都可用。
 
 ### `abs(float) -> float`
 
-Return the absolute value.
+返回绝对值。
 
-### `acos(float) -> angle`, `asin(float) -> angle`, `atan(float) -> angle`, `cos(angle) -> float`, `sin(angle) -> float`, `tan(angle) -> float`
+### `acos(float) -> angle`、`asin(float) -> angle`、`atan(float) -> angle`、`cos(angle) -> float`、`sin(angle) -> float`、`tan(angle) -> float`
 
-The trigonometry function. Note that the should be typed with `deg` or `rad` unit
-(for example `cos(90deg)` or `sin(slider.value * 1deg)`).
+三角函数。注意，应该使用 `deg` 或 `rad` 单位对其进行类型化（例如 `cos(90deg)` 或 `sin(slider.value * 1deg)`）。
 
-### `ceil(float) -> int` and `floor(float) -> int`
+### `ceil(float) -> int` 和 `floor(float) -> int`
 
-Return the ceiling or floor
+返回上限或下限。
 
 ### `clamp(T, T, T) -> T`
 
-Takes a `value`, `minimum` and `maximum` and returns `maximum` if
-`value > maximum`, `minimum` if `value < minimum`, or `value` in all other cases.
+获取 `value`、`minimum` 和 `maximum`，并在 `value > maximum` 时返回 `maximum`，在 `value < minimum` 时返回 `minimum`，在所有其他情况下返回 `value`。
 
 ### `log(float, float) -> float`
 
-Return the log of the first value with a base of the second value
+返回以第二个值为底的第一个值的对数。
 
-### `max(T, T) -> T` and `min(T, T) -> T`
+### `max(T, T) -> T` 和 `min(T, T) -> T`
 
-Return the arguments with the minimum (or maximum) value. All arguments must be of the same numeric type
+返回具有最小（或最大）值的参数。所有参数必须是相同的数字类型。
 
 ### `mod(T, T) -> T`
 
-Perform a modulo operation, where T is some numeric type.
+执行模运算，其中 T 是某种数字类型。
 
 ### `round(float) -> int`
 
-Return the value rounded to the nearest integer
+返回最接近的整数值。
 
 ### `sqrt(float) -> float`
 
-Square root
+平方根。
 
 ### `pow(float, float) -> float`
 
-Return the value of the first value raised to the second
+返回第一个值的第二个值的幂。
+

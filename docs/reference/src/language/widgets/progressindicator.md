@@ -1,14 +1,14 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `ProgressIndicator`
 
-The `ProgressIndicator` informs the user about the status of an on-going operation, such as loading data from the network.
+`ProgressIndicator` 通知用户正在进行的操作的状态，例如从网络加载数据。
 
-### Properties
+### 属性
 
--   **`indeterminate`**: (_in_ _bool_): Set to true if the progress of the operation cannot be determined by value (default value: `false`).
--   **`progress`** (_in_ _float_): Percentage of completion, as value between 0 and 1. Values less than 0 or greater than 1 are capped.
+-   **`indeterminate`**：（_in_ _bool_）：如果操作的进度不能通过值确定，则设置为 true（默认值：`false`）。
+-   **`progress`**（_in_ _float_）：完成百分比，作为 0 到 1 之间的值。小于 0 或大于 1 的值被截断。
 
-### Example
+### 示例
 
 ```slint
 import { ProgressIndicator } from "std-widgets.slint";

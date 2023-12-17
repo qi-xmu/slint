@@ -1,20 +1,20 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `CheckBox`
 
-Use a `CheckBox` to let the user select or deselect values, for example in a list with multiple options. Consider using a `Switch` element instead if the action resembles more something that's turned on or off.
+使用一个`CheckBox`来让用户选择或取消选择值，例如在具有多个选项的列表中。如果操作更像是打开或关闭某些东西，请考虑使用`Switch`元素。
 
-### Properties
+### 属性
 
--   **`checked`**: (_inout_ _bool_): Whether the checkbox is checked or not (default: false).
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, the checkbox can't be pressed (default: true)
--   **`has-focus`**: (_out_ _bool_): Set to true when the checkbox has keyboard focus (default: false).
--   **`text`** (_in_ _string_): The text written next to the checkbox.
+-   **`checked`**: (_inout_ _bool_): 复选框是否被选中（默认值：false）。
+-   **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，复选框无法被按下（默认值：true）
+-   **`has-focus`**: (_out_ _bool_): 当复选框有键盘焦点时设置为 true（默认值：false）。
+-   **`text`** (_in_ _string_): 复选框旁边的文本。
 
-### Callbacks
+### 回调
 
--   **`toggled()`**: The checkbox value changed
+-   **`toggled()`**: 复选框值已更改
 
-### Example
+### 示例
 
 ```slint
 import { CheckBox } from "std-widgets.slint";

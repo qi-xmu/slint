@@ -1,24 +1,17 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `ScrollView`
 
-A Scrollview contains a viewport that is bigger than the view and can be
-scrolled. It has scrollbar to interact with. The viewport-width and
-viewport-height are calculated automatically to create a scollable view
-except for when using a for loop to populate the elements. In that case
-the viewport-width and viewport-height aren't calculated automatically
-and must be set manually for scrolling to work. The ability to
-automatically calculate the viewport-width and viewport-height when
-using for loops may be added in the future and is tracked in issue #407.
+`ScollView` 包含一个比视图大的视口，可以滚动。它有滚动条来交互。视口宽度和视口高度会自动计算以创建一个可滚动的视图，除非使用 for 循环来填充元素。在这种情况下，视口宽度和视口高度不会自动计算，必须手动设置才能实现滚动。在将来可能会添加使用 for 循环时自动计算视口宽度和视口高度的功能，这在问题 #407 中有记录。
 
-### Properties
+### 属性
 
--   **`enabled`** (_in_ _bool_): Used to render the frame as disabled or enabled, but doesn't change behavior of the widget.
--   **`has-focus`** (_in-out_ _bool_): Used to render the frame as focused or unfocused, but doesn't change the behavior of the widget.
--   **`viewport-width`** and **`viewport-height`** (_in-out_ _length_): The `width` and `length` properties of the viewport
--   **`viewport-x`** and **`viewport-y`** (_in-out_ _length_): The `x` and `y` properties of the viewport. Usually these are negative
--   **`visible-width`** and **`visible-height`** (_out_ _length_): The size of the visible area of the ScrollView (not including the scrollbar)
+-   **`enabled`** (_in_ _bool_): 用于将框架呈现为禁用或启用，但不会更改小部件的行为。
+-   **`has-focus`** (_in-out_ _bool_): 用于将框架呈现为聚焦或未聚焦，但不会更改小部件的行为。
+-   **`viewport-width`** 和 **`viewport-height`** (_in-out_ _length_): 视口的 `width` 和 `length` 属性
+-   **`viewport-x`** 和 **`viewport-y`** (_in-out_ _length_): 视口的 `x` 和 `y` 属性。通常这些是负数
+-   **`visible-width`** 和 **`visible-height`** (_out_ _length_): ScrollView 的可见区域的大小（不包括滚动条）
 
-### Example
+### 示例
 
 ```slint
 import { ScrollView } from "std-widgets.slint";

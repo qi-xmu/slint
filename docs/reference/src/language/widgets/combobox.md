@@ -1,21 +1,21 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 ## `ComboBox`
 
-A button that, when clicked, opens a popup to select a value.
+一个按钮，当点击时打开一个弹出窗口来选择一个值。
 
-### Properties
+### 属性
 
--   **`current-index`**: (_in-out_ _int_): The index of the selected value (-1 if no value is selected)
--   **`current-value`**: (_in-out_ _string_): The currently selected text
--   **`enabled`**: (_in_ _bool_): Defaults to true. When false, the combobox can't be interacted with
--   **`has-focus`**: (_out_ _bool_): Set to true when the combobox has keyboard focus.
--   **`model`** (_in_ _\[string\]_): The list of possible values
+-   **`current-index`**: (_in-out_ _int_): 选中值的索引（如果没有选中值，则为-1）
+-   **`current-value`**: (_in-out_ _string_): 当前选中的文本。
+-   **`enabled`**: (_in_ _bool_): 默认为 true。当为 false 时，组合框无法被按下。
+-   **`has-focus`**: (_out_ _bool_): 当组合框有键盘焦点时设置为 true。
+-   **`model`** (_in_ _\[string\]_): 可能值的列表
 
-### Callbacks
+### 回调
 
--   **`selected(string)`**: A value was selected from the combo box. The argument is the currently selected value.
+-   **`selected(string)`**: 从组合框中选择了一个值。参数是当前选中的值。
 
-### Example
+### 示例
 
 ```slint
 import { ComboBox } from "std-widgets.slint";
