@@ -1,74 +1,63 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Properties
+# 属性
 
-All elements have properties. Built-in elements come with common properties such
-as color or dimensional properties. You can assign values or entire
-[expressions](expressions.md) to them:
+所有元素都有属性。内置元素带有常见的属性，例如颜色或尺寸属性。您可以为它们分配值或整个[表达式](expressions.md)：
 
 ```slint,no-preview
 export component Example inherits Window {
-    // Simple expression: ends with a semi colon
+    // 简单表达式：以分号结尾
     width: 42px;
-    // or a code block (no semicolon needed)
+    // 或者代码块（不需要分号）
     height: { 42px }
 }
 ```
 
-The default value of a property is the default value of the type.
-For example a boolean property defaults to `false`, an `int` property to zero, etc.
+属性的默认值是类型的默认值。例如，布尔属性默认为 `false`，`int` 属性为零，等等。
 
-In addition to the existing properties, define extra properties by specifying the
-name, the type, and optionally a default value:
+除了现有属性之外，还可以通过指定名称、类型和可选的默认值来定义额外的属性：
 
 ```slint,no-preview
 export component Example {
-    // declare a property of type int with the name `my-property`
+    // 声明一个名为 `my-property` 的 int 类型的属性
     property<int> my-property;
 
-    // declare a property with a default value
+    // 声明一个带有默认值的属性
     property<int> my-second-property: 42;
 }
 ```
 
-Annotate extra properties with a qualifier that specifies how the
-property can be read and written:
+使用限定符对额外的属性进行注释，以指定如何读取和写入属性：
 
--   **`private`** (the default): The property can only be accessed from within the component.
--   **`in`**: The property is an input. It can be set and modified by the user of this component,
-    for example through bindings or by assignment in callbacks.
-    The component can provide a default binding, but it can't overwrite it by
-    assignment
--   **`out`**: An output property that can only be set by the component. It's read-only for the
-    users of the components.
--   **`in-out`**: The property can be read and modified by everyone.
+-   **`private`**（默认）：该属性只能从组件内部访问。
+-   **`in`**：该属性是输入。它可以被组件的用户设置和修改，例如通过绑定或在回调中赋值。组件可以提供默认绑定，但不能通过赋值来覆盖它。
+-   **`out`**：输出属性，只能由组件设置。对于组件的用户来说，它是只读的。
+-   **`in-out`**：该属性可以被所有人读取和修改。
 
 ```slint,no-preview
 export component Button {
-    // This is meant to be set by the user of the component.
+    // 这是组件的用户设置的。
     in property <string> text;
-    // This property is meant to be read by the user of the component.
+    // 这个属性是组件的用户读取的。
     out property <bool> pressed;
-    // This property is meant to both be changed by the user and the component itself.
+    // 这个属性既可以被用户又可以被组件本身改变。
     in-out property <bool> checked;
 
-    // This property is internal to this component.
+    // 这个属性是组件内部的。
     private property <bool> has-mouse;
 }
 ```
 
-All properties declared at the top level of a component that aren't `private` are accessible from the outside when using a component as an element, or via the
-language bindings from the business logic.
+除非使用组件作为元素或通过业务逻辑的语言绑定，否则所有在组件顶层声明的属性都可以从外部访问。
 
-## Bindings
+## 绑定
 
-The binding expression is automatically re-evaluated when properties accessed in the expression change.
+当绑定表达式中访问的属性发生变化时，绑定表达式会自动重新计算。
 
-In the following example, the text of the button automatically changes when
-the user presses the button. Incrementing the `counter` property automatically
-invalidates the expression bound to `text` and triggers a re-evaluation.
+在下面的示例中，当用户按下按钮时，按钮的文本会自动更改。增加 `counter` 属性会自动使绑定到 `text` 的表达式无效，并触发重新计算。
 
 ```slint
 import { Button } from "std-widgets.slint";
+
 export component Example inherits Window {
     preferred-width: 50px;
     preferred-height: 50px;
@@ -80,21 +69,17 @@ export component Example inherits Window {
 }
 ```
 
-The re-evaluation happens lazily when the property is queried.
+当查询属性时，重新计算会延迟发生。
 
-Internally, a dependency is registered for any property accessed while evaluating a binding.
-When a property changes, the dependencies are notified and all dependent bindings
-are marked as dirty.
+在内部，当计算绑定时，会为任何访问的属性注册依赖项。当属性发生变化时，依赖项会被通知，所有依赖的绑定都会被标记为脏。
 
-Callbacks in native code by default don't depend on any properties unless they query a property in the native code.
+默认情况下，本机代码中的回调不依赖于任何属性，除非它们在本机代码中查询属性。
 
-## Two-way Bindings
+## 双向绑定
 
-Create two-way bindings between properties with the `<=>` syntax. These properties will be linked
-together and always contain the same value.
+使用 `<=>` 语法在属性之间创建双向绑定。这些属性将被链接在一起，并始终包含相同的值。
 
-The right hand side of the `<=>` must be a reference to a property of the same type.
-The property type is optional with two-way bindings, it will be inferred if not specified.
+`<=>` 的右边必须是相同类型的属性的引用。如果未指定属性类型，则双向绑定将被推断。
 
 ```slint,no-preview
 export component Example  {
@@ -109,10 +94,9 @@ export component Example  {
 }
 ```
 
-## Relative Lengths
+## 相对长度
 
-Sometimes it's convenient to express the relationships of length properties in terms of relative percentages.
-For example the following inner blue rectangle has half the size of the outer green window:
+有时以相对百分比的形式表达长度属性之间的关系很方便。例如下面的内部蓝色矩形的大小是外部绿色窗口的一半：
 
 ```slint
 export component Example inherits Window {
@@ -128,14 +112,12 @@ export component Example inherits Window {
 }
 ```
 
-This pattern of expressing the `width` or `height` in percent of the parent's property with the same name is
-common. For convenience, a short-hand syntax exists for this scenario:
+以百分比的形式表达父属性的 `width` 或 `height` 的关系是常见的模式。为了方便起见，这种情况下存在一种简写语法：
 
--   The property is `width` or `height`
--   A binding expression evaluates to a percentage.
+-   属性是 `width` 或 `height`
+-   绑定表达式计算为百分比。
 
-If these conditions are met, then it's not necessary to specify the parent property, instead you can simply
-use the percentage. The earlier example then looks like this:
+如果满足这些条件，则不需要指定父属性，而是可以直接使用百分比。前面的示例如下所示：
 
 ```slint
 export component Example inherits Window {

@@ -1,13 +1,13 @@
 .. Copyright © SixtyFPS GmbH <info@slint.dev>
 .. SPDX-License-Identifier: MIT
 
-Syntax
+基础语法
 ======
 
 .. toctree::
    :hidden:
    :maxdepth: 2
-   :caption: Reference
+   :caption: 基础语法
 
    comments.md
    identifiers.md
