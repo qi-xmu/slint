@@ -1,8 +1,8 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Conditional Element
+# 条件元素
 
-The `if` construct instantiates an element only if a given condition is true.
-The syntax is `if condition : id := Element { ... }`
+`if` 构造仅在给定条件为真时实例化元素。
+语法为 `if condition : id := Element { ... }`
 
 ```slint
 export component Example inherits Window {

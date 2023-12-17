@@ -1,27 +1,27 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Statements
+# 语句
 
-Callback handlers may contain complex statements:
+回调处理程序可以包含复杂的语句：
 
-Assignment:
+赋值：
 
 ```slint,ignore
 clicked => { some-property = 42; }
 ```
 
-Self-assignment with `+=` `-=` `*=` `/=`
+使用 `+=` `-=` `*=` `/=` 进行自赋值
 
 ```slint,ignore
 clicked => { some-property += 42; }
 ```
 
-Calling a callback
+调用回调
 
 ```slint,ignore
 clicked => { root.some-callback(); }
 ```
 
-Conditional statements
+条件语句
 
 ```slint,ignore
 clicked => {
@@ -35,7 +35,7 @@ clicked => {
 }
 ```
 
-Empty expression
+空表达式
 
 ```slint,ignore
 clicked => { }

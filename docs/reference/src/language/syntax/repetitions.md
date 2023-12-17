@@ -1,20 +1,18 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Repetition
+# 循环
 
-Use the `for`-`in` syntax to create an element multiple times.
+使用 `for`-`in` 语法多次创建元素。
 
-The syntax looks like this: `for name[index] in model : id := Element { ... }`
+语法如下：`for name[index] in model : id := Element { ... }`
 
-The _model_ can be of the following type:
+`model` 可以是以下类型之一：
 
--   an integer, in which case the element will be repeated that amount of time
--   an [array type or a model](types.md#arrays-and-models) declared natively, in which case the element will be instantiated for each element in the array or model.
+-   整数，此时元素将重复该次数
+-   本地声明的 [数组或模型](types.md#id11)，此时元素将为数组或模型中的每个元素实例化。
 
-The _name_ will be available for lookup within the element and is going to be like a pseudo-property set to the
-value of the model. The _index_ is optional and will be set to the index of this element in the model.
-The _id_ is also optional.
+`name` 将在元素内部可用于查找，就像一个伪属性，其值将设置为模型的值。`index` 是可选的，将设置为模型中此元素的索引。`id` 也是可选的。
 
-## Examples
+## 示例
 
 ```slint
 export component Example inherits Window {

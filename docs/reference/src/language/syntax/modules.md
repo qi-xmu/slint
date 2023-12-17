@@ -1,11 +1,9 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Modules
+# 模块
 
-Components declared in a `.slint` file can be used as elements in other
-`.slint` files, by means of exporting and importing them.
+在 `.slint` 文件中声明的组件可以作为其他 `.slint` 文件中的元素使用，通过导出和导入它们。
 
-By default, every type declared in a `.slint` file is private. The `export`
-keyword changes this.
+默认情况下，`.slint` 文件中声明的每个类型都是私有的。`export` 关键字可以改变这一点。
 
 ```slint,no-preview
 component ButtonHelper inherits Rectangle {
@@ -22,11 +20,9 @@ component Button inherits Rectangle {
 export { Button }
 ```
 
-In the above example, `Button` is accessible from other `.slint` files, but
-`ButtonHelper` isn't.
+在上面的示例中，`Button` 可以从其他 `.slint` 文件中访问，但 `ButtonHelper` 不能。
 
-It's also possible to change the name just for the purpose of exporting, without
-affecting its internal use:
+还可以在不影响其内部使用的情况下，为导出的目的更改名称：
 
 ```slint,no-preview
 component Button inherits Rectangle {
@@ -36,11 +32,9 @@ component Button inherits Rectangle {
 export { Button as ColorButton }
 ```
 
-In the above example, `Button` isn't accessible from the outside, but
-is available under the name `ColorButton` instead.
+在上面的示例中，`Button` 无法从外部访问，但可以使用名称 `ColorButton` 代替。
 
-For convenience, a third way of exporting a component is to declare it exported
-right away:
+为方便起见，第三种导出组件的方法是直接声明它们为导出：
 
 ```slint,no-preview
 export component Button inherits Rectangle {
@@ -48,7 +42,7 @@ export component Button inherits Rectangle {
 }
 ```
 
-Similarly, components exported from other files may be imported:
+类似地，可以导入从其他文件导出的组件：
 
 ```slint,ignore
 import { Button } from "./button.slint";
@@ -61,8 +55,7 @@ export component App inherits Rectangle {
 }
 ```
 
-In the event that two files export a type under the same name, then you have the option
-of assigning a different name at import time:
+如果两个文件都导出了相同名称的类型，则可以在导入时选择为其分配不同的名称：
 
 ```slint,ignore
 import { Button } from "./button.slint";
@@ -75,19 +68,18 @@ export component App inherits Rectangle {
 }
 ```
 
-Elements, globals and structs can be exported and imported.
+元素、全局变量和结构可以导出和导入。
 
-It's also possible to export globals (see [Global Singletons](globals.md)) imported from
-other files:
+还可以导出从其他文件导入的全局变量（参见[全局单例](globals.md)）：
 
 ```slint,ignore
 import { Logic as MathLogic } from "math.slint";
 export { MathLogic } // known as "MathLogic" when using native APIs to access globals
 ```
 
-## Module Syntax
+## 模块语法
 
-The following syntax is supported for importing types:
+导入类型支持以下语法：
 
 ```slint,ignore
 import { export1 } from "module.slint";
@@ -96,7 +88,7 @@ import { export1 as alias1 } from "module.slint";
 import { export1, export2 as alias2, /* ... */ } from "module.slint";
 ```
 
-The following syntax is supported for exporting types:
+导出类型支持以下语法：
 
 ```slint,ignore
 // Export declarations
@@ -111,26 +103,17 @@ export { MySwitch as Alias1, MyButton as Alias2 };
 export * from "other_module.slint";
 ```
 
-## Component Libraries
+## 组件库
 
-Splitting your code base into separate module files promotes re-use and
-improves encapsulation by allow you to hide helper components. This works
-well within a project's own directory structure. To share libraries of
-components between projects without hardcoding their relative paths, use
-the component library syntax:
+将代码库拆分为单独的模块文件可以促进重用，并通过允许隐藏辅助组件来提高封装性。这在项目自己的目录结构中很有效。要在项目之间共享组件库，请使用组件库语法：
 
 ```slint,ignore
 import { MySwitch } from "@mylibrary";
 ```
 
-In the above example, the `MySwitch` component will be imported from a component
-library called "mylibrary". The path to this library must be defined separately at compilation time.
-Use one of the following methods to help the Slint compiler resolve "mylibrary" to the correct
-path on disk:
+在上面的示例中，将从名为“mylibrary”的组件库导入 `MySwitch` 组件。此库的路径必须在编译时单独定义。使用以下方法之一来帮助 Slint 编译器将“mylibrary”解析为正确的磁盘路径：
 
-* When using Rust and `build.rs`, call [`with_library_paths`](slint-build-rust:struct.CompilerConfiguration#method.with_library_paths)
-  to provide a mapping from library name to path.
-* When invoking the `slint-viewer` from the command line, pass `-Lmylibrary=/path/to/my/library` for each component
-  library.
-* When using the live-preview in the VS code extension, configure the Slint extension's library path
-  using the `Slint: Library Paths` setting.
+* 当使用 Rust 和 `build.rs` 时，调用 [`with_library_paths`](slint-build-rust:struct.CompilerConfiguration#method.with_library_paths)
+  以提供从库名称到路径的映射。
+* 当从命令行调用 `slint-viewer` 时，为每个组件库传递 `-Lmylibrary=/path/to/my/library`。
+* 当使用 VS code 扩展中的实时预览时，请使用 `Slint: Library Paths` 设置配置 Slint 扩展的库路径。

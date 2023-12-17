@@ -1,7 +1,7 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# States
+# 状态
 
-The `states` statement allows to declare states and set properties of multiple elements in one go:
+`states` 语句允许一次声明多个元素的状态和属性：
 
 ```slint
 export component Example inherits Window {
@@ -33,18 +33,13 @@ export component Example inherits Window {
 }
 ```
 
-In this example, the `active` and `active-hovered` states are defined depending on the value of the `active`
-boolean property and the `TouchArea`'s `has-hover`. When the user hovers the example with the mouse, it will toggle between a blue and a green background,
-and adjust the text label accordingly. Clicking toggles the `active` property and thus enters the `inactive` state.
+在此示例中，根据 `active` 布尔属性的值和 `TouchArea` 的 `has-hover`，定义了 `active` 和 `active-hover` 状态。当用户用鼠标悬停在示例上时，它将在蓝色和绿色背景之间切换，并相应地调整文本标签。单击切换 `active` 属性，从而进入 `inactive` 状态。
 
-## Transitions
+## 过渡
 
-Transitions bind animations to state changes.
+过渡将动画绑定到状态更改。
 
-This example defines two transitions. First the `out` keyword is used to animate
-all properties for 800ms when leaving the `disabled` state. The second
-transition uses the `in` keyword to animate the background when transitioning
-into the `down` state.
+此示例定义了两个过渡。首先使用 `out` 关键字在离开 `disabled` 状态时为所有属性动画 800ms。第二个过渡使用 `in` 关键字在进入 `down` 状态时动画背景。
 
 ```slint
 export component Example inherits Window {

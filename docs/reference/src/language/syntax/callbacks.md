@@ -1,16 +1,11 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Callbacks
+# 回调函数
 
-Components may declare callbacks, that communicate changes of state
-to the outside. Callbacks are invoked by "calling" them like you would
-call a function.
+组件可以声明回调函数，用于将状态的变化通知给外部。通过像调用函数一样“调用”它们来调用回调函数。
 
-You react to callback invocation by declaring a handler using the `=>` arrow syntax.
-The built-in `TouchArea` element declares a `clicked` callback, that's invoked
-when the user touches the rectangular area covered by the element, or clicks into
-it with the mouse. In the example below, the invocation of that callback is forwarded
-to another custom callback (`hello`) by declaring a handler and invoking our
-custom callback:
+您可以通过使用 `=>` 箭头语法声明处理程序来响应回调函数的调用。
+内置的 `TouchArea` 元素声明了一个 `clicked` 回调函数，当用户触摸元素覆盖的矩形区域或使用鼠标单击该区域时，该回调函数将被调用。
+在下面的示例中，通过声明处理程序并调用我们的自定义回调函数，将回调函数的调用转发到另一个自定义回调函数（`hello`）：
 
 ```slint,no-preview
 export component Example inherits Rectangle {
@@ -27,7 +22,7 @@ export component Example inherits Rectangle {
 }
 ```
 
-It's possible to add parameters to a callback:
+可以向回调函数添加参数：
 
 ```slint,no-preview
 export component Example inherits Rectangle {
@@ -37,7 +32,7 @@ export component Example inherits Rectangle {
 }
 ```
 
-Callbacks may also return a value:
+回调函数也可以返回值：
 
 ```slint,no-preview
 export component Example inherits Rectangle {
@@ -47,9 +42,9 @@ export component Example inherits Rectangle {
 }
 ```
 
-## Aliases
+## 别名
 
-It's possible to declare callback aliases in a similar way to two-way bindings:
+可以类似于双向绑定来声明回调函数别名：
 
 ```slint,no-preview
 export component Example inherits Rectangle {

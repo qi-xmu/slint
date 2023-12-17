@@ -1,11 +1,7 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Expressions
+# 表达式
 
-Expressions are a powerful way to declare relationships and connections in your
-user interface. They´re typically used to combine basic arithmetic with access
-to properties of other elements. When these properties change, the expression
-is automatically re-evaluated and a new value is assigned to the property the
-expression is associated with:
+表达式是在用户界面中声明关系和连接的强大方式。它们通常用于将基本算术与其他元素的属性访问相结合。当这些属性更改时，表达式会自动重新计算并将新值分配给与表达式关联的属性：
 
 ```slint,no-preview
 export component Example {
@@ -18,9 +14,9 @@ export component Example {
 }
 ```
 
-When `my-property` changes, the width changes automatically, too.
+当 `my-property` 更改时，宽度也会自动更改。
 
-Arithmetic in expression with numbers works like in most programming language with the operators `*`, `+`, `-`, `/`:
+数字表达式中的算术运算与大多数编程语言中的运算符 `*`、`+`、`-`、`/` 相同：
 
 ```slint,no-preview
 export component Example {
@@ -28,14 +24,11 @@ export component Example {
 }
 ```
 
-Concatenate strings with `+`.
+使用 `+` 连接字符串。
 
-The operators `&&` and `||` express logical _and_ and _or_ between
-boolean values. The operators `==`, `!=`, `>`, `<`, `>=` and `<=` compare
-values of the same type.
+运算符 `&&` 和 `||` 表示布尔值之间的逻辑 _and_ 和 _or_。运算符 `==`、`!=`、`>`、`<`、`>=` 和 `<=` 比较相同类型的值。
 
-Access an element's properties by using its name, followed by a
-`.` and the property name:
+通过使用其名称，后跟 `.` 和属性名称，访问元素的属性：
 
 ```slint,no-preview
 export component Example {
@@ -46,7 +39,7 @@ export component Example {
 }
 ```
 
-The ternary operator `... ? ... : ...` is also supported, like in C or JavaScript:
+三元运算符 `... ? ... : ...` 也是支持的，就像 C 或 JavaScript 中一样：
 
 ```slint
 export component Example inherits Window {

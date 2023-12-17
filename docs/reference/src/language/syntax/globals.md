@@ -1,10 +1,9 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Global Singletons
+# 全局单例
 
-Declare a global singleton with `global Name { /* .. properties or callbacks .. */ }` to
-make properties and callbacks available throughout the entire project. Access them using `Name.property`.
+使用 `global Name { /* .. properties or callbacks .. */ }` 声明全局单例，以便在整个项目中使用属性和回调。
 
-For example, this can be useful for a common color palette:
+例如，这对于常见的颜色调色板可能很有用：
 
 ```slint,no-preview
 global Palette  {
@@ -19,9 +18,7 @@ export component Example inherits Rectangle {
 }
 ```
 
-Export a global to make it accessible from other files (see [Modules](modules.md)). Export a global from
-the file also exporting the main application component to make it visible
-to native code in the business logic.
+导出全局变量以使其从其他文件中可访问（请参见[模块](modules.md)）。从导出主应用程序组件的文件中导出全局变量，以使其在业务逻辑中的本机代码中可见。
 
 ```slint,ignore
 export global Logic  {
@@ -32,7 +29,7 @@ export global Logic  {
 ```
 
 <details data-snippet-language="rust">
-<summary>Usage from Rust</summary>
+<summary>从 Rust 中使用</summary>
 
 ```rust
 slint::slint!{
@@ -60,7 +57,7 @@ fn main() {
 </details>
 
 <details data-snippet-language="cpp">
-<summary>Usage from C++</summary>
+<summary>从 C++ 中使用</summary>
 
 ```cpp
 #include "app.h"
@@ -77,7 +74,7 @@ fn main() {
 
 </details>
 
-It's possible to re-expose a callback or properties from a global using the two way binding syntax.
+可以使用双向绑定语法从全局变量重新公开回调或属性。
 
 ```slint,no-preview
 global Logic  {

@@ -1,8 +1,7 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
+# 动画
 
-# Animations
-
-Declare animations for properties with the `animate` keyword like this:
+使用 `animate` 关键字为属性声明动画，如下所示：
 
 ```slint
 export component Example inherits Window {
@@ -18,16 +17,15 @@ export component Example inherits Window {
 }
 ```
 
-This will animate the color property for 100ms whenever it changes.
+这将在颜色属性更改时每 100ms 动画一次。
 
-Fine-tune animations using the following parameters:
+使用以下参数微调动画：
 
--   `delay`: the amount of time to wait before starting the animation
--   `duration`: the amount of time it takes for the animation to complete
--   `iteration-count`: The number of times a animation should run. A negative value specifies
-    infinite reruns. Fractual values are possible.
-    For permanently running animations, see [`animation-tick()`](../builtins/functions.md#animation-tick-duration).
--   `easing`: can be any of the following. See [`easings.net`](https://easings.net/) for a visual reference:
+-   `delay`：开始动画之前等待的时间量
+-   `duration`：动画完成所需的时间量
+-   `iteration-count`：动画应运行的次数。负值指定无限次重播。可能的分数值。
+    有关永久运行的动画，请参见 [`animation-tick()`](../builtins/functions.md#animation-tick-duration)。
+-   `easing`：可以是以下任何内容。有关可视参考，请参见 [`easings.net`](https://easings.net/)：
 
     -   `linear`
     -   `ease-in-quad`
@@ -61,19 +59,22 @@ Fine-tune animations using the following parameters:
     -   `ease-in-bounce`
     -   `ease-out-bounce`
     -   `ease-in-out-bounce`
-    -   `cubic-bezier(a, b, c, d)` as in CSS
+    -   `cubic-bezier(a, b, c, d)` 如 CSS 中所示
 
-    Easing examples can also be found on the `Easings` tab of the `gallery` example.
+    缓动示例也可以在 `gallery` 示例的 `Easings` 选项卡中找到。
 
-It's also possible to animate several properties with the same animation, so:
+
+也可以使用相同的动画来动画化多个属性，因此：
 
 ```slint,ignore
 animate x, y { duration: 100ms; easing: ease-out-bounce; }
 ```
 
-is the same as:
+与
 
 ```slint,ignore
 animate x { duration: 100ms; easing: ease-out-bounce; }
 animate y { duration: 100ms; easing: ease-out-bounce; }
 ```
+
+是一样的。
