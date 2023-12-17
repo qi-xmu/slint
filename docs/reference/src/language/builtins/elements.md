@@ -1,40 +1,35 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 # 内置元素
 
-## Common properties
+## 通用属性
 
-### Geometry
+### 几何
 
-These properties are valid on all visible items:
+这些属性对所有可见项都有效：
 
--   **`width`** and **`height`** (_in_ _length_): The size of the element. When set, this overrides the default size.
--   **`x`** and **`y`** (_in_ _length_): The position of the element relative to its parent.
--   **`z`** (_in_ _float_): Allows to specify a different order to stack the items with its siblings. (default value: 0)
--   **`absolute-position`** (_in_ _Point_): The position of the element within the contained window.
+-   **`width`** 和 **`height`** (_in_ _length_): 元素的大小。当设置时，这将覆盖默认大小。
+-   **`x`** 和 **`y`** (_in_ _length_): 元素相对于其父元素的位置。
+-   **`z`** (_in_ _float_): 允许指定与兄弟项堆叠的不同顺序。 (默认值：0)
+-   **`absolute-position`** (_in_ _Point_): 元素在包含窗口中的位置。
 
-### Layout
+### 布局
 
-These properties are valid on all visible items and can be used to specify constraints when used in layouts:
+这些属性对所有可见项都有效，并且可以在布局中使用以指定约束：
 
--   **`col`**, **`row`**, **`colspan`**, **`rowspan`** (_in_ _int_): See [`GridLayout`](#gridlayout).
--   **`horizontal-stretch`** and **`vertical-stretch`** (_in-out_ _float_): Specify how much relative space these elements are stretching in a layout. When 0, this means that the elements won't be stretched unless all elements are 0. Builtin widgets have a value of either 0 or 1.
--   **`max-width`** and **`max-height`** (_in_ _length_): The maximum size of an element
--   **`min-width`** and **`min-height`** (_in_ _length_): The minimum size of an element
--   **`preferred-width`** and **`preferred-height`** (_in_ _length_): The preferred size of an element
+-   **`col`**、**`row`**、**`colspan`**、**`rowspan`** (_in_ _int_): 参见 [`GridLayout`](#gridlayout)。
+-   **`horizontal-stretch`** 和 **`vertical-stretch`** (_in-out_ _float_): 指定这些元素在布局中拉伸的相对空间量。当为 0 时，这意味着除非所有元素都为 0，否则不会拉伸元素。内置小部件的值为 0 或 1。
+-   **`max-width`** 和 **`max-height`** (_in_ _length_): 元素的最大大小
+-   **`min-width`** 和 **`min-height`** (_in_ _length_): 元素的最小大小
+-   **`preferred-width`** 和 **`preferred-height`** (_in_ _length_): 元素的首选大小
 
-### Miscellaneous
+### 杂项
 
--   **`cache-rendering-hint`** (_in_ _bool_): When set to `true`, this provides a hint to the renderer to cache the contents of the element and all the children into an intermediate cached layer. For complex sub-trees that rarely change this may speed up the rendering, at the expense of increased memory consumption. Not all rendering backends support this, so this is merely a hint. (default value: `false`)
--   **`dialog-button-role`** (_in_ _enum [`DialogButtonRole`](enums.md#dialogbuttonrole)_): Specify that this is a button in a `Dialog`.
--   **`opacity`** (_in_ _float_): A value between 0 and 1 (or a percentage) that is used to draw
-    the element and its children with transparency.
-    0 is fully transparent (invisible), and 1 is fully opaque.
-    The opacity is applied to the tree of child elements as if they
-    were first drawn into an intermediate layer, and then the whole layer is rendered with this opacity.
-    (default value: 1)
--   **`visible`** (_in_ _bool_): When set to `false`, the element and all his children won't be drawn and not react to mouse input (default value: `true`)
+-   **`cache-rendering-hint`** (_in_ _bool_): 当设置为 `true` 时，这会向渲染器提供一个提示，将元素及其所有子元素的内容缓存到一个中间缓存层中。对于很少更改的复杂子树，这可能会加快渲染速度，但代价是增加了内存消耗。并非所有渲染后端都支持此功能，因此这仅仅是一个提示。 (默认值：`false`)
+-   **`dialog-button-role`** (_in_ _enum [`DialogButtonRole`](enums.md#dialogbuttonrole)_): 指定这是 `Dialog` 中的按钮。
+-   **`opacity`** (_in_ _float_): 0 到 1 之间的值（或百分比），用于以透明方式绘制元素及其子元素。0 是完全透明（不可见），1 是完全不透明。透明度被应用于子元素的树，就好像它们首先被绘制到一个中间层中，然后整个层以此透明度渲染。 (默认值：1)
+-   **`visible`** (_in_ _bool_): 当设置为 `false` 时，元素及其所有子元素都不会被绘制，也不会对鼠标输入做出反应 (默认值：`true`)
 
-The following example demonstrates the `opacity` property with children. An opacity is applied to the red rectangle. Since the green rectangle is a child of the red one, you can see the gradient underneath it, but you can't see the red rectangle through the green one.
+下面的示例演示了具有子元素的 `opacity` 属性。一个不透明度应用于红色矩形。由于绿色矩形是红色矩形的子元素，您可以看到它下面的渐变，但是您无法通过绿色矩形看到红色矩形。
 
 ```slint
 export component Example inherits Window {
@@ -59,54 +54,50 @@ export component Example inherits Window {
 }
 ```
 
-### Accessibility
+### 可访问性
 
-Use the following `accessible-` properties to make your items interact well with software like screen readers, braille terminals and other software to make your application accessible.
+使用以下 `accessible-` 属性使您的项与屏幕阅读器、点字终端和其他软件进行良好的交互，以使您的应用程序可访问。
 
--   **`accessible-role`** (_in_ _enum [`AccessibleRole`](enums.md#accessiblerole)_): The role of the element. This property is mandatory to be able to use any other accessible properties. It should be set to a constant value. (default value: `none` for most elements, but `text` for the Text element)
--   **`accessible-checkable`** (_in_ _bool_): Whether the element is can be checked or not.
--   **`accessible-checked`** (_in_ _bool_): Whether the element is checked or not. This maps to the "checked" state of checkboxes, radio buttons, and other widgets.
--   **`accessible-description`** (_in_ _string_): The description for the current element.
--   **`accessible-has-focus`** (_in_ _bool_): Set to true when the current element currently has the focus.
--   **`accessible-label`** (_in_ _string_): The label for an interactive element. (default value: empty for most elements, or the value of the `text` property for Text elements)
--   **`accessible-value-maximum`** (_in_ _float_): The maximum value of the item. This is used for example by spin boxes.
--   **`accessible-value-minimum`** (_in_ _float_): The minimum value of the item.
--   **`accessible-value-step`** (_in_ _float_) The smallest increment or decrement by which the current value can change. This corresponds to the step by which a handle on a slider can be dragged.
--   **`accessible-value`** (_in_ _string_): The current value of the item.
+-   **`accessible-role`** (_in_ _enum [`AccessibleRole`](enums.md#accessiblerole)_): 元素的角色。必须设置此属性才能使用任何其他可访问属性。它应该设置为一个常量值。 (默认值：大多数元素为 `none`，但 `text` 元素为 `text`)
+-   **`accessible-checkable`** (_in_ _bool_): 元素是否可以被选中。
+-   **`accessible-checked`** (_in_ _bool_): 元素是否被选中。这对应于复选框、单选按钮和其他小部件的“选中”状态。
+-   **`accessible-description`** (_in_ _string_): 当前元素的描述。
+-   **`accessible-has-focus`** (_in_ _bool_): 当前元素当前是否具有焦点。
+-   **`accessible-label`** (_in_ _string_): 交互元素的标签。 (默认值：大多数元素为空，或者 `text` 属性的值为 Text 元素)
+-   **`accessible-value-maximum`** (_in_ _float_): 项目的最大值。这用于例如旋转框。
+-   **`accessible-value-minimum`** (_in_ _float_): 项目的最小值。
+-   **`accessible-value-step`** (_in_ _float_) 当前值可以更改的最小增量或减量。这对应于滑块上的手柄可以拖动的步长。
+-   **`accessible-value`** (_in_ _string_): 项目的当前值。
 
-### Drop Shadows
+### 投影
 
-To achieve the graphical effect of a visually elevated shape that shows a shadow effect underneath the frame of
-an element, it's possible to set the following `drop-shadow` properties:
+为了实现图形效果，即在元素的框架下方显示阴影效果的视觉提升形状，可以设置以下 `drop-shadow` 属性：
 
--   **`drop-shadow-blur`** (_in_ _length_): The radius of the shadow that also describes the level of blur applied to the shadow. Negative values are ignored and zero means no blur. (default value: 0)
--   **`drop-shadow-color`** (_in_ _color_): The base color of the shadow to use. Typically that color is the starting color of a gradient that fades into transparency.
--   **`drop-shadow-offset-x`** and **`drop-shadow-offset-y`** (_in_ _length_): The horizontal and vertical distance of the shadow from the element's frame. A negative value places the shadow left / above of the element.
+-   **`drop-shadow-blur`** (_in_ _length_): 阴影的半径，也描述了阴影的模糊程度。忽略负值，零表示没有模糊。 (默认值：0)
+-   **`drop-shadow-color`** (_in_ _color_): 用于阴影的基本颜色。通常，该颜色是渐变的起始颜色，渐变会淡入透明度。
+-   **`drop-shadow-offset-x`** 和 **`drop-shadow-offset-y`** (_in_ _length_): 阴影与元素框架的水平和垂直距离。负值将阴影放置在元素的左侧/上方。
 
-The `drop-shadow` effect is supported for `Rectangle` elements.
+`drop-shadow` 效果支持 `Rectangle` 元素。
 
 ## `Dialog`
 
-Dialog is like a window, but it has buttons that are automatically laid out.
+Dialog 类似于窗口，但它具有自动布局的按钮。
 
-A Dialog should have one main element as child, that isn't a button.
-The dialog can have any number of `StandardButton` widgets or other buttons
-with the `dialog-button-role` property.
-The buttons will be placed in an order that depends on the target platform at run-time.
+Dialog 应该有一个主元素作为子元素，该元素不是按钮。
+对话框可以有任意数量的 `StandardButton` 小部件或其他具有 `dialog-button-role` 属性的按钮。
+按钮将按照目标平台在运行时的顺序放置。
 
-The `kind` property of the `StandardButton`s and the `dialog-button-role` properties need to be set to a constant value, it can't be an arbitrary variable expression.
-There can't be several `StandardButton`s of the same kind.
+`StandardButton` 的 `kind` 属性和 `dialog-button-role` 属性需要设置为常量值，它不能是任意变量表达式。
+不能有多个相同类型的 `StandardButton`。
 
-A callback `<kind>_clicked` is automatically added for each `StandardButton` which doesn't have an explicit
-callback handler, so it can be handled from the native code: For example if there is a button of kind `cancel`,
-a `cancel_clicked` callback will be added.
+对于没有显式回调处理程序的每个 `StandardButton`，都会自动添加一个回调 `<kind>_clicked`，因此可以从本机代码处理它：例如，如果有一个 `cancel` 类型的按钮，则会添加一个 `cancel_clicked` 回调。
 
-### Properties
+### 属性
 
--   **`icon`** (_in_ _image_): The window icon shown in the title bar or the task bar on window managers supporting it.
--   **`title`** (_in_ _string_): The window title that is shown in the title bar.
+-   **`icon`** (_in_ _image_): 窗口图标，显示在标题栏或窗口管理器支持的任务栏上。
+-   **`title`** (_in_ _string_): 窗口标题，显示在标题栏中。
 
-### Example
+### 示例
 
 ```slint
 import { StandardButton, Button } from "std-widgets.slint";
@@ -125,48 +116,38 @@ export component Example inherits Dialog {
 
 ## `Flickable`
 
-The `Flickable` is a low-level element that is the base for scrollable
-widgets, such as the [`ScrollView`](../widgets/scrollview.md). When the `viewport-width` or the
-`viewport-height` is greater than the parent's `width` or `height`
-respectively, the element becomes scrollable. Note that the `Flickable`
-doesn't create a scrollbar. When unset, the `viewport-width` and `viewport-height` are
-calculated automatically based on the `Flickable`'s children. This isn't the
-case when using a `for` loop to populate the elements. This is a bug tracked in
-issue [#407](https://github.com/slint-ui/slint/issues/407).
-The maximum and preferred size of the `Flickable` are based on the viewport.
+`Flickable` 是一个低级元素，是可滚动小部件（例如 [`ScrollView`](../widgets/scrollview.md)）的基础。
+当 `viewport-width` 或 `viewport-height` 大于父元素的 `width` 或 `height` 时，元素变为可滚动。
+请注意，`Flickable` 不会创建滚动条。当未设置时，`viewport-width` 和 `viewport-height` 会根据 `Flickable` 的子元素自动计算。
+当使用 `for` 循环来填充元素时，情况并非如此。
+这是一个小Bug，跟踪在问题 [#407](https://github.com/slint-ui/slint/issues/407).
+`Flickable` 的最大和首选大小基于视口。
 
-When not part of a layout, its width or height defaults to 100% of the parent
-element when not specified.
+当不在布局中时，其宽度或高度默认为未指定时父元素的 100%。
 
-### Pointer Event Interaction
+### 指针事件交互
 
-If the `Flickable`'s area contains elements that use `TouchArea` to act on clicking, such as `Button`
-widgets, then the following algorithm is used to distinguish between the user's intent of scrolling or
-interacting with `TouchArea` elements:
+如果 `Flickable` 的区域包含使用 `TouchArea` 来响应点击的元素，例如 `Button` 小部件，则使用以下算法来区分用户滚动或与 `TouchArea` 元素交互的意图：
 
-1. If the `Flickable`'s `interactive` property is `false`, all events are forwarded to elements underneath.
-2. If a press event is received where the event's coordinates interact with a `TouchArea`, the event is stored
-   and any subsequent move and release events are handled as follows:
-   1. If 100ms elapse without any events, the stored press event is delivered to the `TouchArea`.
-   2. If a release event is received before 100ms have elapsed, the stored press event as well as the
-      release event are immediately delivered to the `TouchArea` and the algorithm resets.
-   3. Any move events received will start a flicking operation on the `Flickable` if all of the following
-      conditions are met:
-        1. The event is received before 500ms have elapsed since receiving the press event.
-        2. The distance to the press event exceeds 8 logical pixels in an orientation in which we are allowed to move.
-      If `Flickable` decides to flick, any press event sent previously to a `TouchArea`, is followed up
-      by an exit event. During the phase of receiving move events, the flickable follows the coordinates.
-3. If the interaction of press, move, and release events begins at coordinates that do not intersect with
-   a `TouchArea`, then `Flickable` will flick immediately on pointer move events when the euclidean distance
-   to the coordinates of the press event exceeds 8 logical pixels.
+1. 如果 `Flickable` 的 `interactive` 属性为 `false`，则所有事件都将转发到下面的元素。
+2. 如果接收到与 `TouchArea` 交互的坐标的按下事件，则存储事件，并且任何后续的移动和释放事件都将按照以下方式处理：
+   1. 如果 100ms 没有任何事件，则存储的按下事件将传递给 `TouchArea`。
+   2. 如果在 100ms 之前收到释放事件，则存储的按下事件以及释放事件将立即传递给 `TouchArea`，并且算法将重置。
+   3. 收到的任何移动事件都将在以下情况下在 `Flickable` 上启动滑动操作，如果满足以下所有条件：
+        1. 在收到按下事件后 500ms 之前收到事件。
+        2. 到按下事件的距离在我们允许移动的方向上超过 8 个逻辑像素。
+      如果 `Flickable` 决定滑动，则在 `TouchArea` 之前发送到 `TouchArea` 的任何按下事件都将跟随退出事件。
+      在接收移动事件的阶段，`Flickable` 将跟随坐标。
 
-### Properties
+3. 如果按下、移动和释放事件的交互始于与 `TouchArea` 不相交的坐标，则在以下情况下 `Flickable` 将立即滑动指针移动事件，当到按下事件的坐标的欧几里得距离超过 8 个逻辑像素时。
 
--   **`interactive`** (_in_ _bool_): When true, the viewport can be scrolled by clicking on it and dragging it with the cursor. (default value: true)
--   **`viewport-height`**, **`viewport-width`** (_in_ _length_): The total size of the scrollable element.
--   **`viewport-x`**, **`viewport-y`** (_in_ _length_): The position of the scrollable element relative to the `Flickable`. This is usually a negative value.
+### 属性
 
-### Example
+-   **`interactive`** (_in_ _bool_): 当为 true 时，可以通过单击并使用光标拖动来滚动视口。 (默认值：true)
+-   **`viewport-height`**、**`viewport-width`** (_in_ _length_): 滚动元素的总大小。
+-   **`viewport-x`**、**`viewport-y`** (_in_ _length_): 滚动元素相对于 `Flickable` 的位置。这通常是一个负值。
+
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -186,35 +167,29 @@ export component Example inherits Window {
 
 ## `FocusScope`
 
-The `FocusScope` exposes callbacks to intercept key events. Note that `FocusScope`
-will only invoke them when it `has-focus`.
+`FocusScope` 公开回调以拦截键盘事件。请注意，`FocusScope` 仅在它 `has-focus` 时才会调用它们。
 
-The [`KeyEvent`](structs.md#keyevent) has a text property, which is a character of the key entered.
-When a non-printable key is pressed, the character will be either a control character,
-or it will be mapped to a private unicode character. The mapping of these non-printable, special characters is available in the [`Key`](namespaces.md#key) namespace
+[`KeyEvent`](structs.md#keyevent) 有一个 text 属性，它是输入的键的字符。
+当按下非打印键时，字符将是控制字符，或者它将映射到私有 unicode 字符。这些不可打印的特殊字符的映射在 [`Key`](namespaces.md#key) 命名空间中可用。
 
-### Properties
+### 属性
 
--   **`has-focus`** (_out_ _bool_): Is `true` when the element has keyboard
-    focus.
--   **`enabled`** (_in_ _bool_): When true, the `FocusScope` will make itself the focused element when clicked. Set this to false if you don't want the click-to-focus
-    behavior. Similarly, a disabled `FocusScope` does not accept the focus via tab focus traversal. A parent `FocusScope` will still receive key events from
-    child `FocusScope`s that were rejected, even if `enabled` is set to false. (default value: true)
+-   **`has-focus`** (_out_ _bool_): 当元素具有键盘焦点时为 `true`。
+-   **`enabled`** (_in_ _bool_): 当为 true 时，`FocusScope` 将在单击时使自身成为焦点元素。如果不希望单击以获得焦点的行为，则将其设置为 false。
+    类似地，禁用的 `FocusScope` 不会通过 tab 焦点遍历接受焦点。即使 `enabled` 设置为 false，父 `FocusScope` 仍将接收来自被拒绝的子 `FocusScope` 的键事件。
+    (默认值：true)
 
-### Functions
+### 函数
 
--   **`focus()`** Call this function to transfer keyboard focus to this `FocusScope`,
-    to receive future [`KeyEvent`](structs.md#keyevent)s.
+-   **`focus()`** 调用此函数将键盘焦点转移到此 `FocusScope`，以接收未来的 [`KeyEvent`](structs.md#keyevent)。
 
-### Callbacks
+### 回调
 
--   **`key-pressed(KeyEvent) -> EventResult`**: Invoked when a key is pressed, the argument is a [`KeyEvent`](structs.md#keyevent) struct. The returned [`EventResult`](enums.md#eventresult) indicates whether to accept or ignore the event. Ignored events are
-    forwarded to the parent element.
--   **`key-released(KeyEvent) -> EventResult`**: Invoked when a key is released, the argument is a [`KeyEvent`](structs.md#keyevent) struct. The returned [`EventResult`](enums.md#eventresult) indicates whether to accept or ignore the event. Ignored events are
-    forwarded to the parent element.
--   **`focus-changed-event()`**: Invoked when the focus on the `FocusScope` has changed.
+-   **`key-pressed(KeyEvent) -> EventResult`**: 按下键时调用，参数是 [`KeyEvent`](structs.md#keyevent) 结构。返回的 [`EventResult`](enums.md#eventresult) 指示是否接受或忽略事件。被忽略的事件将转发到父元素。
+-   **`key-released(KeyEvent) -> EventResult`**: 释放键时调用，参数是 [`KeyEvent`](structs.md#keyevent) 结构。返回的 [`EventResult`](enums.md#eventresult) 指示是否接受或忽略事件。被忽略的事件将转发到父元素。
+-   **`focus-changed-event()`**: 当焦点在 `FocusScope` 上发生变化时调用。
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -238,23 +213,21 @@ export component Example inherits Window {
 
 ## `GridLayout`
 
-`GridLayout` places its children in a grid. `GridLayout` adds properties to each child: `col`, `row`, `colspan`, `rowspan`.
-You can control the position of children with `col` and `row`.
-If `col` or `row` aren't specified, they are automatically computed such that the item is next to the previous item, in the same row.
-Alternatively, the item can be put in a `Row` element.
+`GridLayout` 将其子元素放置在网格中。`GridLayout` 为每个子元素添加属性：`col`、`row`、`colspan`、`rowspan`。
+您可以使用 `col` 和 `row` 控制子元素的位置。
+如果未指定 `col` 或 `row`，则会自动计算它们，以便该项位于上一项旁边，同一行中。
+或者，可以将该项放在 `Row` 元素中。
 
-### Properties
+### 属性
 
--   **`spacing`** (_in_ _length_): The distance between the elements in the layout.
--   **`spacing-horizontal`**, **`spacing-vertical`** (_in_ _length_):
-    Set these properties to override the spacing on specific directions.
--   **`padding`** (_in_ _length_): The padding within the layout.
--   **`padding-left`**, **`padding-right`**, **`padding-top`** and **`padding-bottom`** (_in_ _length_):
-    Set these properties to override the padding on specific sides.
+-   **`spacing`** (_in_ _length_): 网格中的项之间的距离
+-   **`spacing-horizontal`** 和 **`spacing-vertical`** (_in_ _length_): 网格中的项之间的水平和垂直距离
+-   **`padding`** (_in_ _length_): 网格周围的空间.
+-   **`padding-left`**、**`padding-right`**、**`padding-top`** 和 **`padding-bottom`** (_in_ _length_): 设置这些属性将覆盖 `padding` 属性。
 
-### Examples
+### 示例
 
-This example uses the `Row` element:
+这个例子使用 `Row` 元素。
 
 ```slint
 export component Foo inherits Window {
@@ -274,48 +247,45 @@ export component Foo inherits Window {
 }
 ```
 
-This example uses the `col` and `row` properties
+这个例子使用 `col` 和 `row` 属性。
 
 ```slint
 export component Foo inherits Window {
     width: 200px;
-    height: 150px;
+    height: 200px;
     GridLayout {
-        Rectangle { background: red; }
-        Rectangle { background: blue; }
-        Rectangle { background: yellow; row: 1; }
-        Rectangle { background: green; }
-        Rectangle { background: black; col: 2; row: 0; }
+        spacing: 5px;
+        Rectangle { background: red; col: 0; row: 0; }
+        Rectangle { background: blue; col: 1; row: 0; }
+        Rectangle { background: yellow; col: 0; row: 1; }
+        Rectangle { background: green; col: 1; row: 1; }
     }
 }
 ```
 
 ## `Image`
 
-An `Image` can be used to represent an image loaded from a file.
+一个 `Image` 元素显示一个图像。图像可以是从文件加载的，也可以是内存中的图像。
 
-### Properties
+### 属性
 
--   **`colorize`** (_in_ _brush_): When set, the image is used as an alpha mask and is drawn in the given color (or with the gradient).
--   **`image-fit`** (_in_ _enum [`ImageFit`](enums.md#imagefit)_): Specifies how the source image shall be fit into the image element. (default value: `contain` when the `Image` element is part of a layout, `fill` otherwise)
--   **`image-rendering`** (_in_ _enum [`ImageRendering`](enums.md#imagerendering)_): Specifies how the source image will be scaled. (default value: `smooth`)
+-   **`colorize`** (_in_ _brush_): 当设置时，图像被用作 alpha 蒙版，并以给定的颜色（或渐变）绘制。
+-   **`image-fit`** (_in_ _enum [`ImageFit`](enums.md#imagefit)_): 指定如何将源图像适合到图像元素中。 (默认值：当 `Image` 元素是布局的一部分时为 `contain`，否则为 `fill`)
+-   **`image-rendering`** (_in_ _enum [`ImageRendering`](enums.md#imagerendering)_): 指定如何缩放源图像。 (默认值：`smooth`)
 -   **`rotation-angle`** (_in_ _angle_), **`rotation-origin-x`** (_in_ _length_), **`rotation-origin-y`** (_in_ _length_):
-    Rotates the image by the given angle around the specified origin point. The default origin point is the center of the element.
-    When these properties are set, the `Image` can't have children.
--   **`source`** (_in_ _image_): The image to load. Use the `@image-url("...")` macro to specify the location of the image.
--   **`source-clip-x`**, **`source-clip-y`**, **`source-clip-width`**, **`source-clip-height`** (_in_ _int_): Properties in source
-    image coordinates that define the region of the source image that is rendered. By default the entire source image is visible:
-    | Property | Default Binding |
+    以给定的角度围绕指定的原点旋转图像。默认原点是元素的中心。
+    设置这些属性时，`Image` 不能有子元素。
+-   **`source`** (_in_ _image_): 要加载的图像。使用 `@image-url("...")` 宏指定图像的位置。
+-   **`source-clip-x`**、**`source-clip-y`**、**`source-clip-width`** 和 **`source-clip-height`** (_in_ _int_): 在源图像坐标中定义渲染的源图像的区域。默认情况下，整个源图像是可见的：
+    | 属性 | 默认绑定 |
     |----------|---------------|
     | `source-clip-x` | `0` |
     | `source-clip-y` | `0` |
     | `source-clip-width` | `source.width - source-clip-x` |
     | `source-clip-height` | `source.height - source-clip-y` |
--   **`width`**, **`height`** (_in_ _length_): The width and height of the image as it appears on the screen.The default values are
-    the sizes provided by the **`source`** image. If the `Image` is **not** in a layout and only **one** of the two sizes are
-    specified, then the other defaults to the specified value scaled according to the aspect ratio of the **`source`** image.
+-   **`width`** 和 **`height`** (_in_ _length_): 图像在屏幕上显示的宽度和高度。默认值是 **`source`** 图像提供的大小。如果 `Image` **不是**在布局中，并且只有**一个**大小被指定，则另一个默认为指定值，根据 **`source`** 图像的纵横比缩放。
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -334,7 +304,7 @@ export component Example inherits Window {
 }
 ```
 
-Scaled while preserving the aspect ratio:
+保持纵横比缩放：
 
 ```slint
 export component Example inherits Window {
@@ -353,47 +323,35 @@ export component Example inherits Window {
 
 ## `Path`
 
-The `Path` element allows rendering a generic shape, composed of different geometric commands. A path
-shape can be filled and outlined.
+`Path` 元素允许渲染一个通用形状，由不同的几何命令组成。路径形状可以填充和轮廓。
 
-When not part of a layout, its width or height defaults to 100% of the parent element when not specified.
+当不在布局中时，其宽度或高度默认为未指定时父元素的 100%。
 
-A path can be defined in two different ways:
+路径可以通过两种不同的方式定义：
 
--   Using SVG path commands as a string
--   Using path command elements in `.slint` markup.
+-   使用 SVG 路径命令作为字符串
+-   使用 `.slint` 标记中的路径命令元素。
 
-The coordinates used in the geometric commands are within the imaginary coordinate system of the path.
-When rendering on the screen, the shape is drawn relative to the `x` and `y` properties. If the `width`
-and `height` properties are non-zero, then the entire shape is fit into these bounds - by scaling
-accordingly.
+几何命令中使用的坐标是路径的想象坐标系中的坐标。
+在屏幕上渲染时，形状相对于 `x` 和 `y` 属性绘制。如果 `width` 和 `height` 属性为非零，则整个形状将根据这些边界进行缩放。
 
-### Common Path Properties
+### 通用路径属性
 
--   **`fill`** (_in_ _brush_): The color for filling the shape of the path.
--   **`fill-rule`** (_in_ _enum [`FillRule`](enums.md#fillrule)_): The fill rule to use for the path. (default value: `nonzero`)
--   **`stroke`** (_in_ _brush_): The color for drawing the outline of the path.
--   **`stroke-width`** (_in_ _length_): The width of the outline.
--   **`width`** (_in_ _length_): If non-zero, the path will be scaled to fit into the specified width.
--   **`height`** (_in_ _length_): If non-zero, the path will be scaled to fit into the specified height.
--   **`viewbox-x`**/**`viewbox-y`**/**`viewbox-width`**/**`viewbox-height`** (_in_ _float_) These four
-    properties allow defining the position and size of the viewport of the path in path coordinates.
+-   **`fill`** (_in_ _brush_): 用于填充路径形状的颜色。
+-   **`fill-rule`** (_in_ _enum [`FillRule`](enums.md#fillrule)_): 用于路径的填充规则。 (默认值：`nonzero`)
+-   **`stroke`** (_in_ _brush_): 用于绘制路径轮廓的颜色。
+-   **`stroke-width`** (_in_ _length_): 轮廓的宽度。
+-   **`width`** (_in_ _length_): 如果非零，则路径将缩放以适合指定的宽度。
+-   **`height`** (_in_ _length_): 如果非零，则路径将缩放以适合指定的高度。
+-   **`viewbox-x`**/**`viewbox-y`**/**`viewbox-width`**/**`viewbox-height`** (_in_ _float_) 这四个属性允许在路径坐标中定义路径的视口的位置和大小。
 
-    If the `viewbox-width` or `viewbox-height` is less or equal than zero, the viewbox properties are
-    ignored and instead the bounding rectangle of all path elements is used to define the view port.
+    如果 `viewbox-width` 或 `viewbox-height` 小于或等于零，则忽略视口属性，而是使用所有路径元素的边界矩形来定义视口。
 
--   **`clip`** (_in_ _bool_): By default, when a path has a view box defined and the elements render
-    outside of it, they are still rendered. When this property is set to `true`, then rendering will be
-    clipped at the boundaries of the view box.
-    This property must be a literal `true` or `false` (default value: `false`)
+-   **`clip`** (_in_ _bool_): 默认情况下，当路径具有视口定义并且元素在其外部渲染时，它们仍然会被渲染。当此属性设置为 `true` 时，将在视口边界处剪切渲染。此属性必须是文字 `true` 或 `false`（默认值：`false`）
 
-#### Path Using SVG commands
+#### 使用 SVG 命令的路径
 
-SVG is a popular file format for defining scalable graphics, which are often composed of paths. In SVG
-paths are composed using [commands](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#path_commands),
-which in turn are written in a string. In `.slint` the path commands are provided to the `commands`
-property. The following example renders a shape consists of an arc and a rectangle, composed of `line-to`,
-`move-to` and `arc` commands:
+SVG 是一种流行的文件格式，用于定义可缩放的图形，这些图形通常由路径组成。在 SVG 中，路径由 [命令](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/d#path_commands) 组成，这些命令又写成字符串。在 `.slint` 中，路径命令提供给 `commands` 属性。下面的示例渲染由 `line-to`、`move-to` 和 `arc` 命令组成的弧和矩形形状：
 
 ```slint
 export component Example inherits Path {
@@ -405,14 +363,13 @@ export component Example inherits Path {
 }
 ```
 
-The commands are provided in a property:
+命令作为属性提供：
 
--   **`commands`** (_in_ _string_): A string providing the commands according to the SVG path specification.
+-   **`commands`** (_in_ _string_): 根据 SVG 路径规范提供命令的字符串。
 
-#### Path Using SVG Path Elements
+#### 使用 SVG 路径元素的路径
 
-The shape of the path can also be described using elements that resemble the SVG path commands but use the
-`.slint` markup syntax. The earlier example using SVG commands can also be written like that:
+路径的形状也可以使用类似 SVG 路径命令的元素来描述，但使用 `.slint` 标记语法。前面使用 SVG 命令的示例也可以这样写：
 
 ```slint
 export component Example inherits Path {
@@ -444,97 +401,84 @@ export component Example inherits Path {
 }
 ```
 
-Note how the coordinates of the path elements don't use units - they operate within the imaginary
-coordinate system of the scalable path.
+注意路径元素的坐标不使用单位 - 它们在可缩放路径的想象坐标系中运行。
 
-##### `MoveTo` Sub-element for `Path`
+##### `Path` 的 `MoveTo` 子元素
 
-The `MoveTo` sub-element closes the current sub-path, if present, and moves the current point
-to the location specified by the `x` and `y` properties. Subsequent elements such as `LineTo`
-will use this new position as their starting point, therefore this starts a new sub-path.
+`MoveTo` 子元素关闭当前子路径（如果存在），并将当前点移动到由 `x` 和 `y` 属性指定的位置。随后的元素（如 `LineTo`）将使用此新位置作为其起点，因此这将开始一个新的子路径。
 
-###### Properties
+###### 属性
 
--   **`x`** (_in_ _float_): The x position of the new current point.
--   **`y`** (_in_ _float_): The y position of the new current point.
+-   **`x`** (_in_ _float_): 新当前点的 x 位置。
+-   **`y`** (_in_ _float_): 新当前点的 y 位置。
 
-##### `LineTo` Sub-element for `Path`
+##### `Path` 的 `LineTo` 子元素
 
-The `LineTo` sub-element describes a line from the path's current position to the
-location specified by the `x` and `y` properties.
+`LineTo` 子元素描述了从路径的当前位置到由 `x` 和 `y` 属性指定的位置的线。
 
-###### Properties
+###### 属性
 
--   **`x`** (_in_ _float_): The target x position of the line.
--   **`y`** (_in_ _float_): The target y position of the line.
+-   **`x`** (_in_ _float_): 线的目标 x 位置。
+-   **`y`** (_in_ _float_): 线的目标 y 位置。
 
-##### `ArcTo` Sub-element for `Path`
+##### `Path` 的 `ArcTo` 子元素
 
-The `ArcTo` sub-element describes the portion of an ellipse. The arc is drawn from the path's
-current position to the location specified by the `x` and `y` properties. The remaining properties
-are modelled after the SVG specification and allow tuning visual features such as the direction
-or angle.
+`ArcTo` 子元素描述了从路径的当前位置到由 `x` 和 `y` 属性指定的位置的线。
 
-###### Properties
+###### 属性
 
--   **`large-arc`** (_in_ _bool_): Out of the two arcs of a closed ellipse, this flag selects that the larger arc is to be rendered. If the property is `false`, the shorter arc is rendered instead.
--   **`radius-x`** (_in_ _float_): The x-radius of the ellipse.
--   **`radius-y`** (_in_ _float_): The y-radius of the ellipse.
--   **`sweep`** (_in_ _bool_): If the property is `true`, the arc will be drawn as a clockwise turning arc; anti-clockwise otherwise.
--   **`x-rotation`** (_in_ _float_): The x-axis of the ellipse will be rotated by the value of this properties, specified in as angle in degrees from 0 to 360.
--   **`x`** (_in_ _float_): The target x position of the line.
--   **`y`** (_in_ _float_): The target y position of the line.
+-   **`large-arc`** (_in_ _bool_): 在封闭椭圆的两个弧中，此标志选择要呈现的较大的弧。如果该属性为 `false`，则呈现较短的弧。
+-   **`radius-x`** (_in_ _float_): 椭圆的 x 半径。
+-   **`radius-y`** (_in_ _float_): 椭圆的 y 半径。
+-   **`sweep`** (_in_ _bool_): 如果该属性为 `true`，则弧将作为顺时针弧绘制；否则为逆时针。
+-   **`x-rotation`** (_in_ _float_): 椭圆的 x 轴将以此属性的值旋转，以角度表示，范围为 0 到 360。
+-   **`x`** (_in_ _float_): 线的目标 x 位置。
+-   **`y`** (_in_ _float_): 线的目标 y 位置。
 
-##### `CubicTo` Sub-element for `Path`
+##### `Path` 的 `CubicTo` 子元素
 
-The `CubicTo` sub-element describes a smooth Bézier from the path's current position to the
-location specified by the `x` and `y` properties, using two control points specified by their
-respective properties.
+`CubicTo` 子元素描述了从路径的当前位置到由 `x` 和 `y` 属性指定的位置的平滑贝塞尔曲线，使用由其各自属性指定的两个控制点。
 
-###### Properties
+###### 属性
 
--   **`control-1-x`** (_in_ _float_): The x coordinate of the curve's first control point.
--   **`control-1-y`** (_in_ _float_): The y coordinate of the curve's first control point.
--   **`control-2-x`** (_in_ _float_): The x coordinate of the curve's second control point.
--   **`control-2-y`** (_in_ _float_): The y coordinate of the curve's second control point.
--   **`x`** (_in_ _float_): The target x position of the curve.
--   **`y`** (_in_ _float_): The target y position of the curve.
+-   **`control-1-x`** (_in_ _float_): 曲线的第一个控制点的 x 坐标。
+-   **`control-1-y`** (_in_ _float_): 曲线的第一个控制点的 y 坐标。
+-   **`control-2-x`** (_in_ _float_): 曲线的第二个控制点的 x 坐标。
+-   **`control-2-y`** (_in_ _float_): 曲线的第二个控制点的 y 坐标。
+-   **`x`** (_in_ _float_): 曲线的目标 x 位置。
+-   **`y`** (_in_ _float_): 曲线的目标 y 位置。
 
-##### `QuadraticTo` Sub-element for `Path`
+##### `Path` 的 `QuadraticTo` 子元素
 
-The `QuadraticTo` sub-element describes a smooth Bézier from the path's current position to the
-location specified by the `x` and `y` properties, using the control points specified by the
-`control-x` and `control-y` properties.
+`QuadraticTo` 子元素描述了从路径的当前位置到由 `x` 和 `y` 属性指定的位置的平滑贝塞尔曲线，使用由 `control-x` 和 `control-y` 属性指定的控制点。
 
-###### Properties
+###### 属性
 
--   **`control-x`** (_in_ _float_): The x coordinate of the curve's control point.
--   **`control-y`** (_in_ _float_): The y coordinate of the curve's control point.
--   **`x`** (_in_ _float_): The target x position of the curve.
--   **`y`** (_in_ _float_): The target y position of the curve.
+-   **`control-x`** (_in_ _float_): 曲线的控制点的 x 坐标。
+-   **`control-y`** (_in_ _float_): 曲线的控制点的 y 坐标。
+-   **`x`** (_in_ _float_): 曲线的目标 x 位置。
+-   **`y`** (_in_ _float_): 曲线的目标 y 位置。
 
-##### `Close` Sub-element for `Path`
+##### `Path` 的 `Close` 子元素
 
-The `Close` element closes the current sub-path and draws a straight line from the current
-position to the beginning of the path.
+`Close` 元素关闭当前子路径，并绘制一条直线从当前位置到路径的起点。
 
 ## `PopupWindow`
 
-Use this element to show a popup window like a tooltip or a popup menu.
+使用此元素显示弹出窗口，例如工具提示或弹出菜单。
 
-Note: It isn't allowed to access properties of elements within the popup from outside of the `PopupWindow`.
+注意：不允许从 `PopupWindow` 外部访问其内部元素的属性。
 
-### Properties
+### 属性
 
--   **`close-on-click`** (_in_ _bool_): By default, a PopupWindow closes when the user clicks. Set this
-    to false to prevent that behavior and close it manually using the `close()` function. (default value: true)
+-   **`close-on-click`** (_in_ _bool_): 默认情况下，当用户单击时，`PopupWindow` 将关闭。将此设置为 false 可以防止该行为，并使用 `close()` 函数手动关闭它。 (默认值：true)
 
-### Functions
+### 函数
 
--   **`show()`** Show the popup on the screen.
--   **`close()`** Closes the popup. Use this if you set the `close-on-click` property to false.
+-   **`show()`** 显示弹出窗口。
+-   **`close()`** 关闭弹出窗口。如果将 `close-on-click` 属性设置为 false，则使用此函数。
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -555,20 +499,19 @@ export component Example inherits Window {
 
 ## `Rectangle`
 
-By default, a `Rectangle` is just an empty item that shows nothing. By setting a color or configuring a border,
-it's then possible to draw a rectangle on the screen.
+默认情况下，`Rectangle` 是一个什么都不显示的空项。通过设置颜色或配置边框，可以在屏幕上绘制矩形。
 
-When not part of a layout, its width and height default to 100% of the parent element.
+当不在布局中时，其宽度或高度默认为未指定时父元素的 100%。
 
-### Properties
+### 属性
 
--   **`background`** (_in_ _brush_): The background brush of this `Rectangle`, typically a color. (default value: `transparent`)
--   **`border-color`** (_in_ _brush_): The color of the border. (default value: `transparent`)
--   **`border-radius`** (_in_ _length_): The size of the radius. (default value: 0)
--   **`border-width`** (_in_ _length_): The width of the border. (default value: 0)
--   **`clip`** (_in_ _bool_): By default, when an element is bigger or outside another element, it's still shown. When this property is set to `true`, the children of this `Rectangle` are clipped to the border of the rectangle. (default value: `false`)
+-   **`background`** (_in_ _brush_): 此 `Rectangle` 的背景画刷，通常是颜色。 (默认值：`transparent`)
+-   **`border-color`** (_in_ _brush_): 边框的颜色。 (默认值：`transparent`)
+-   **`border-radius`** (_in_ _length_): 半径的大小。 (默认值：0)
+-   **`border-width`** (_in_ _length_): 边框的宽度。 (默认值：0)
+-   **`clip`** (_in_ _bool_): 默认情况下，当一个元素比另一个元素大或超出另一个元素时，它仍然会显示。当此属性设置为 `true` 时，此 `Rectangle` 的子元素将被剪切到矩形的边框。 (默认值：`false`)
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -621,47 +564,46 @@ export component Example inherits Window {
 
 ## `TextInput`
 
-The `TextInput` is a lower-level item that shows text and allows entering text.
+`TextInput` 是一个较低级别的项，用于显示文本并允许输入文本。
 
-When not part of a layout, its width or height defaults to 100% of the parent element when not specified.
+当不在布局中时，其宽度或高度默认为未指定时父元素的 100%。
 
-### Properties
+### 属性
 
--   **`color`** (_in_ _brush_): The color of the text (default value: depends on the style)
--   **`font-family`** (_in_ _string_): The name of the font family selected for rendering the text.
--   **`font-size`** (_in_ _length_): The font size of the text.
--   **`font-weight`** (_in_ _int_): The weight of the font. The values range from 100 (lightest) to 900 (thickest). 400 is the normal weight.
--   **`font-italic`** (_in_ _bool_): Whether or not the font face should be drawn italicized or not. (default value: false)
--   **`has-focus`** (_out_ _bool_): `TextInput` sets this to `true` when it's focused. Only then it receives [`KeyEvent`](structs.md#keyevent)s.
--   **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](enums.md#texthorizontalalignment)_): The horizontal alignment of the text.
--   **`input-type`** (_in_ _enum [`InputType`](enums.md#inputtype)_): Use this to configure `TextInput` for editing special input, such as password fields. (default value: `text`)
--   **`letter-spacing`** (_in_ _length_): The letter spacing allows changing the spacing between the glyphs. A positive value increases the spacing and a negative value decreases the distance. (default value: 0)
--   **`read-only`** (_in_ _bool_): When set to `true`, text editing via keyboard and mouse is disabled but selecting text is still enabled as well as editing text programatically. (default value: `false`)
--   **`selection-background-color`** (_in_ _color_): The background color of the selection.
--   **`selection-foreground-color`** (_in_ _color_): The foreground color of the selection.
--   **`single-line`** (_in_ _bool_): When set to `true`, the text is always rendered as a single line, regardless of new line separators in the text. (default value: `true`)
--   **`text-cursor-width`** (_in_ _length_): The width of the text cursor. (default value: provided at run-time by the selected widget style)
--   **`text`** (_in-out_ _string_): The text rendered and editable by the user.
--   **`vertical-alignment`** (_in_ _enum [`TextVerticalAlignment`](enums.md#textverticalalignment)_): The vertical alignment of the text.
--   **`wrap`** (_in_ _enum [`TextWrap`](enums.md#textwrap)_): The way the text input wraps. Only makes sense when `single-line` is false. (default value: no-wrap)
+-   **`color`** (_in_ _brush_): 文本的颜色 (默认值：取决于样式)
+-   **`font-family`** (_in_ _string_): 用于呈现文本的字体系列的名称。
+-   **`font-size`** (_in_ _length_): 文本的字体大小。
+-   **`font-weight`** (_in_ _int_): 字体的粗细。值的范围从 100（最轻）到 900（最厚）。400 是正常的重量。
+-   **`font-italic`** (_in_ _bool_): 字体是否应该以斜体显示。 (默认值：false)
+-   **`has-focus`** (_out_ _bool_): 当它被聚焦时，`TextInput` 将其设置为 `true`。只有在这种情况下，它才会接收 [`KeyEvent`](structs.md#keyevent)。
+-   **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](enums.md#texthorizontalalignment)_): 文本的水平对齐方式。
+-   **`input-type`** (_in_ _enum [`InputType`](enums.md#inputtype)_): 使用此属性为特殊输入（例如密码字段）配置 `TextInput`。 (默认值：`text`)
+-   **`letter-spacing`** (_in_ _length_): 字母间距允许更改字形之间的间距。正值增加间距，负值减少距离。 (默认值：0)
+-   **`read-only`** (_in_ _bool_): 当设置为 `true` 时，禁用通过键盘和鼠标编辑文本，但仍然启用选择文本以及以编程方式编辑文本。 (默认值：`false`)
+-   **`selection-background-color`** (_in_ _color_): 选择的背景颜色。
+-   **`selection-foreground-color`** (_in_ _color_): 选择的前景颜色。
+-   **`single-line`** (_in_ _bool_): 当设置为 `true` 时，文本始终呈现为单行，而不管文本中的换行符。 (默认值：`true`)
+-   **`text-cursor-width`** (_in_ _length_): 文本光标的宽度。 (默认值：由所选的小部件样式在运行时提供)
+-   **`text`** (_in-out_ _string_): 用户呈现和可编辑的文本。
+-   **`vertical-alignment`** (_in_ _enum [`TextVerticalAlignment`](enums.md#textverticalalignment)_): 文本的垂直对齐方式。
+-   **`wrap`** (_in_ _enum [`TextWrap`](enums.md#textwrap)_): 文本输入的方式。仅当 `single-line` 为 false 时才有意义。 (默认值：no-wrap)
 
-### Functions
+### 函数
 
--   **`focus()`** Call this function to focus the text input and make it receive future keyboard events.
--   **`select-all()`** Selects all text.
--   **`clear-selection()`** Clears the selection.
--   **`copy()`** Copies the selected text to the clipboard.
--   **`cut()`** Copies the selected text to the clipboard and removes it from the editable area.
--   **`paste()`** Pastes the text content of the clipboard at the cursor position.
+-   **`focus()`** 调用此函数以聚焦文本输入，并使其接收未来的键盘事件。
+-   **`select-all()`** 选择所有文本。
+-   **`clear-selection()`** 清除选择。
+-   **`copy()`** 将所选文本复制到剪贴板。
+-   **`cut()`** 将所选文本复制到剪贴板，并将其从可编辑区域中删除。
+-   **`paste()`** 将剪贴板的文本内容粘贴到光标位置。
 
-### Callbacks
+### 回调
 
--   **`accepted()`**: Invoked when enter key is pressed.
--   **`cursor-position-changed(Point)`**: The cursor was moved to the new (x, y) position
-    described by the [_`Point`_](structs.md#point) argument.
--   **`edited()`**: Invoked when the text has changed because the user modified it.
+-   **`accepted()`**: 按下回车键时调用。
+-   **`cursor-position-changed(Point)`**: 光标移动到由 [_`Point`_](structs.md#point) 参数描述的新位置 (x, y)。
+-   **`edited()`**: 当文本因用户修改而更改时调用。
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -676,32 +618,27 @@ export component Example inherits Window {
 
 ## `Text`
 
-The `Text` element is responsible for rendering text. Besides the `text` property, that specifies which text to render,
-it also allows configuring different visual aspects through the `font-family`, `font-size`, `font-weight` and `color` properties.
+`Text` 元素负责呈现文本。除了指定要呈现的文本的 `text` 属性之外，它还允许通过 `font-family`、`font-size`、`font-weight` 和 `color` 属性来配置不同的视觉方面。
 
-The `Text` element can break long text into multiple lines of text. A line feed character (`\n`) in the string of the `text`
-property will trigger a manual line break. For automatic line breaking you need to set the `wrap` property to a value other than
-`no-wrap`, and it's important to specify a `width` and `height` for the `Text` element, in order to know where to break. It's
-recommended to place the `Text` element in a layout and let it set the `width` and `height` based on the available screen space
-and the text itself.
+`Text` 元素可以将长文本分成多行文本。`text` 属性中的换行符（`\n`）将触发手动换行。对于自动换行，需要将 `wrap` 属性设置为除 `no-wrap` 之外的值，并且重要的是为 `Text` 元素指定 `width` 和 `height`，以便知道在哪里换行。建议将 `Text` 元素放在布局中，并根据可用的屏幕空间和文本本身设置 `width` 和 `height`。
 
-### Properties
+### 属性
 
--   **`color`** (_in_ _brush_): The color of the text. (default value: depends on the style)
--   **`font-family`** (_in_ _string_): The name of the font family selected for rendering the text.
--   **`font-size`** (_in_ _length_): The font size of the text.
--   **`font-weight`** (_in_ _int_): The weight of the font. The values range from 100 (lightest) to 900 (thickest). 400 is the normal weight.
--   **`font-italic`** (_in_ _bool_): Whether or not the font face should be drawn italicized or not. (default value: false)
--   **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](enums.md#texthorizontalalignment)_): The horizontal alignment of the text.
--   **`letter-spacing`** (_in_ _length_): The letter spacing allows changing the spacing between the glyphs. A positive value increases the spacing and a negative value decreases the distance. (default value: 0)
--   **`overflow`** (_in_ _enum [`TextOverflow`](enums.md#textoverflow)_): What happens when the text overflows (default value: clip).
--   **`text`** (_in_ _[string](../syntax/types.md#strings)_): The text rendered.
--   **`vertical-alignment`** (_in_ _enum [`TextVerticalAlignment`](enums.md#textverticalalignment)_): The vertical alignment of the text.
--   **`wrap`** (_in_ _enum [`TextWrap`](enums.md#textwrap)_): The way the text wraps (default value: `no-wrap`).
+-   **`color`** (_in_ _brush_): 文本的颜色。 (默认值：取决于样式)
+-   **`font-family`** (_in_ _string_): 用于呈现文本的字体系列的名称。
+-   **`font-size`** (_in_ _length_): 文本的字体大小。
+-   **`font-weight`** (_in_ _int_): 字体的粗细。值的范围从 100（最轻）到 900（最厚）。400 是正常的重量。
+-   **`font-italic`** (_in_ _bool_): 字体是否应该以斜体显示。 (默认值：false)
+-   **`horizontal-alignment`** (_in_ _enum [`TextHorizontalAlignment`](enums.md#texthorizontalalignment)_): 文本的水平对齐方式。
+-   **`letter-spacing`** (_in_ _length_): 字母间距允许更改字形之间的间距。正值增加间距，负值减少距离。 (默认值：0)
+-   **`overflow`** (_in_ _enum [`TextOverflow`](enums.md#textoverflow)_): 文本溢出时发生的情况 (默认值：clip)。
+-   **`text`** (_in_ _[string](../syntax/types.md#strings)_): 要呈现的文本。
+-   **`vertical-alignment`** (_in_ _enum [`TextVerticalAlignment`](enums.md#textverticalalignment)_): 文本的垂直对齐方式。
+-   **`wrap`** (_in_ _enum [`TextWrap`](enums.md#textwrap)_): 文本换行的方式 (默认值：`no-wrap`)。
 
-### Example
+### 示例
 
-This example shows the text "Hello World" in red, using the default font:
+这个例子显示红色的文本“Hello World”，使用默认字体：
 
 ```slint
 export component Example inherits Window {
@@ -716,8 +653,7 @@ export component Example inherits Window {
 }
 ```
 
-This example breaks a longer paragraph of text into multiple lines, by setting a `wrap`
-policy and assigning a limited `width` and enough `height` for the text to flow down:
+这个例子将较长的文本段分成多行文本，通过设置 `wrap` 策略并为 `Text` 元素分配有限的 `width` 和足够的 `height`，以便文本向下流动：
 
 ```slint
 export component Example inherits Window {
@@ -736,38 +672,28 @@ export component Example inherits Window {
 
 ## `TouchArea`
 
-Use `TouchArea` to control what happens when the region it covers is touched or interacted with
-using the mouse.
+使用 `TouchArea` 控制当鼠标触摸或与其交互时覆盖的区域会发生什么。
 
-When not part of a layout, its width or height default to 100% of the parent element.
+当不在布局中时，其宽度或高度默认为未指定时父元素的 100%。
 
-### Properties
+### 属性
 
--   **`has-hover`** (_out_ _bool_): `TouchArea` sets this to `true` when the mouse is over it.
--   **`mouse-cursor`** (_in_ _enum [`MouseCursor`](enums.md#mousecursor)_): The mouse cursor type when the mouse is hovering the `TouchArea`.
--   **`mouse-x`**, **`mouse-y`** (_out_ _length_): Set by the `TouchArea` to the position of the mouse within it.
--   **`pressed-x`**, **`pressed-y`** (_out_ _length_): Set by the `TouchArea` to the position of the mouse at the moment it was last pressed.
--   **`pressed`** (_out_ _bool_): Set to `true` by the `TouchArea` when the mouse is pressed over it.
+-   **`has-hover`** (_out_ _bool_): 当鼠标悬停在其上时，`TouchArea` 将其设置为 `true`。
+-   **`mouse-cursor`** (_in_ _enum [`MouseCursor`](enums.md#mousecursor)_): 当鼠标悬停在 `TouchArea` 上时的鼠标光标类型。
+-   **`mouse-x`**、**`mouse-y`** (_out_ _length_): `TouchArea` 将其设置为鼠标在其中的位置。
+-   **`pressed-x`**、**`pressed-y`** (_out_ _length_): `TouchArea` 将其设置为鼠标在最后一次按下的位置。
+-   **`pressed`** (_out_ _bool_): 当鼠标在其上按下时，`TouchArea` 将其设置为 `true`。
 
-### Callbacks
+### 回调
 
--   **`clicked()`**: Invoked when clicked: The mouse is pressed, then released on this element.
--   **`double-clicked()**`: Invoked when double-clicked. The mouse is pressed and released twice on this element in a short
-    period of time. Assigning this callback will cause the `clicked` callback to get delayed, so that Slint can
-    detect whether the first click was a click or the first half of a double click.
--   **`moved()`**: The mouse has been moved. This will only be called if the mouse is also pressed.
-    See also **pointer-event(PointerEvent)**.
--   **`pointer-event(PointerEvent)`**: Invoked when a button was pressed or released or the pointer moved.
-    The [_`PointerEvent`_](structs.md#pointerevent) argument contains information such which button was pressed
-    and any active keyboard modifiers.
-    In the [_`PointerEventKind::Move`_](structs.md#pointereventkind) case the `buttons` field will always
-    be set to `PointerEventButton::Other`, independent of whether any button is pressed or not.
--   **`scroll-event(PointerScrollEvent) -> EventResult`**: Invoked when the mouse wheel was rotated or another scroll gesture was made.
-    The [_`PointerScrollEvent`_](structs.md#pointerscrollevent) argument contains information about how much to scroll in what direction.
-    The returned [`EventResult`](enums.md#eventresult) indicates whether to accept or ignore the event. Ignored events are
-    forwarded to the parent element.
+-   **`clicked()`**: 当点击时调用：鼠标在此元素上按下，然后释放。
+-   **`double-clicked()**`: 当双击时调用。鼠标在此元素上按下并释放两次。分配此回调将导致 `clicked` 回调被延迟，以便 Slint 可以检测第一次单击是单击还是双击的第一半。
+-   **`moved()`**: 鼠标已移动。只有当鼠标也被按下时，才会调用此函数。另请参阅 **pointer-event(PointerEvent)**。
+-   **`pointer-event(PointerEvent)`**: 当按下或释放按钮或指针移动时调用。[_`PointerEvent`_](structs.md#pointerevent) 参数包含有关要滚动多少以及在哪个方向上的信息。返回的 [`EventResult`](enums.md#eventresult) 指示接受还是忽略事件。忽略的事件将转发到父元素。
+-   **`scroll-event(PointerScrollEvent) -> EventResult`**: 当鼠标滚轮旋转或进行其他滚动手势时调用。[_`PointerScrollEvent`_](structs.md#pointerscrollevent) 参数包含有关要滚动多少以及在哪个方向上的信息。返回的 [`EventResult`](enums.md#eventresult) 指示接受还是忽略事件。忽略的事件将转发到父元素。
+-   **`scroll-event(PointerScrollEvent) -> EventResult`**: 当鼠标滚轮旋转或进行其他滚动手势时调用。[_`PointerScrollEvent`_](structs.md#pointerscrollevent) 参数包含有关要滚动多少以及在哪个方向上的信息。返回的 [`EventResult`](enums.md#eventresult) 指示接受还是忽略事件。忽略的事件将转发到父元素。
 
-### Example
+### 示例
 
 ```slint
 export component Example inherits Window {
@@ -794,20 +720,18 @@ export component Example inherits Window {
 }
 ```
 
-## `VerticalLayout` and `HorizontalLayout`
+## `VerticalLayout` 和 `HorizontalLayout`
 
-These layouts place their children next to each other vertically or horizontally.
-The size of elements can either be fixed with the `width` or `height` property, or if they aren't set
-they will be computed by the layout respecting the minimum and maximum sizes and the stretch factor.
+这些布局将其子元素垂直或水平放置在一起。元素的大小可以使用 `width` 或 `height` 属性固定，或者如果它们未设置，则布局将根据最小和最大大小以及拉伸因子来计算元素的大小。
 
-### Properties
+### 属性
 
--   **`spacing`** (_in_ _length_): The distance between the elements in the layout.
--   **`padding`** (_in_ _length_): the padding within the layout.
--   **`padding-left`**, **`padding-right`**, **`padding-top`** and **`padding-bottom`** (_in_ _length_): Set these properties to override the padding on specific sides.
--   **`alignment`** (_in_ _enum [`LayoutAlignment`](enums.md#layoutalignment)_): Set the alignment. Matches the CSS flex box.
+-   **`spacing`** (_in_ _length_): 布局中元素之间的距离。
+-   **`padding`** (_in_ _length_): 布局内的填充。
+-   **`padding-left`**、**`padding-right`**、**`padding-top`** 和 **`padding-bottom`** (_in_ _length_): 设置这些属性以覆盖特定边上的填充。
+-   **`alignment`** (_in_ _enum [`LayoutAlignment`](enums.md#layoutalignment)_): 设置对齐方式。与 CSS flex box 匹配。
 
-### Example
+### 示例
 
 ```slint
 export component Foo inherits Window {
@@ -825,19 +749,17 @@ export component Foo inherits Window {
 
 ## `Window`
 
-`Window` is the root of the tree of elements that are visible on the screen.
+`Window` 是屏幕上可见的元素树的根。
 
-The `Window` geometry will be restricted by its layout constraints: Setting the `width` will result in a fixed width,
-and the window manager will respect the `min-width` and `max-width` so the window can't be resized bigger
-or smaller. The initial width can be controlled with the `preferred-width` property. The same applies to the `Window`s height.
+`Window` 的几何形状将受其布局约束的限制：设置 `width` 将导致固定宽度，窗口管理器将尊重 `min-width` 和 `max-width`，因此窗口不能调整大小更大或更小。初始宽度可以使用 `preferred-width` 属性控制。高度也是如此。
 
-### Properties
+### 属性
 
--   **`always-on-top`** (_in_ _bool_): Whether the window should be placed above all other windows on window managers supporting it.
--   **`background`** (_in_ _brush_): The background brush of the `Window`. (default value: depends on the style)
--   **`default-font-family`** (_in_ _string_): The font family to use as default in text elements inside this window, that don't have their `font-family` property set.
--   **`default-font-size`** (_in-out_ _length_): The font size to use as default in text elements inside this window, that don't have their `font-size` property set. The value of this property also forms the basis for relative font sizes.
--   **`default-font-weight`** (_in_ _int_): The font weight to use as default in text elements inside this window, that don't have their `font-weight` property set. The values range from 100 (lightest) to 900 (thickest). 400 is the normal weight.
--   **`icon`** (_in_ _image_): The window icon shown in the title bar or the task bar on window managers supporting it.
--   **`no-frame`** (_in_ _bool_): Whether the window should be borderless/frameless or not.
--   **`title`** (_in_ _string_): The window title that is shown in the title bar.
+-   **`always-on-top`** (_in_ _bool_): 是否应将窗口放置在窗口管理器支持的所有其他窗口之上。
+-   **`background`** (_in_ _brush_): `Window` 的背景画刷。 (默认值：取决于样式)
+-   **`default-font-family`** (_in_ _string_): 用作此窗口中文本元素的默认字体系列的名称，这些元素没有设置其 `font-family` 属性。
+-   **`default-font-size`** (_in-out_ _length_): 用作此窗口中文本元素的默认字体大小，这些元素没有设置其 `font-size` 属性。此属性的值也构成相对字体大小的基础。
+-   **`default-font-weight`** (_in_ _int_): 用作此窗口中文本元素的默认字体粗细，这些元素没有设置其 `font-weight` 属性。值的范围从 100（最轻）到 900（最厚）。400 是正常的重量。
+-   **`icon`** (_in_ _image_): 在标题栏或窗口管理器支持的任务栏中显示的窗口图标。
+-   **`no-frame`** (_in_ _bool_): 是否应该无边框/无框架。
+-   **`title`** (_in_ _string_): 在标题栏中显示的窗口标题。

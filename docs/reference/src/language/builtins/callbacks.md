@@ -1,17 +1,15 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Builtin Callbacks
+# 内置回调
 
 ## `init()`
 
-Every element implicitly declares an `init` callback. You can assign a code block to it that will be invoked when the
-element is instantiated and after all properties are initialized with the value of their final binding. The order of
-invocation is from inside to outside. The following example will print "first", then "second", and then "third":
+每个元素都隐式声明了一个 `init` 回调函数。您可以将代码块分配给它，当元素被实例化并且所有属性都使用其最终绑定的值初始化后，将调用该代码块。调用的顺序是从内到外的。下面的示例将打印“first”，然后是“second”，然后是“third”：
 
 ```slint,no-preview
 component MyButton inherits Rectangle {
     in-out property <string> text: "Initial";
     init => {
-        // If `text` is queried here, it will have the value "Hello".
+        // 如果在此处查询 `text`，它将具有值“Hello”。
         debug("first");
     }
 }
@@ -30,8 +28,8 @@ export component MyWindow inherits Window {
 }
 ```
 
-Don't use this callback to initialize properties, because this violates the declarative principle.
-Avoid using this callback, unless you need it, for example, in order to notify some native code:
+不要使用此回调函数来初始化属性，因为这违反了声明性原则。
+除非需要，否则避免使用此回调函数，例如，为了通知某些本机代码：
 
 ```slint,no-preview
 global SystemService  {

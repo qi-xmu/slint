@@ -1,11 +1,11 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Builtin Functions
+# 内置函数
 
 ## `animation-tick() -> duration`
 
-This function returns a monotonically increasing time, which can be used for animations.
-Calling this function from a binding will constantly re-evaluate the binding.
-It can be used like so: `x: 1000px + sin(animation-tick() / 1s * 360deg) * 100px;` or `y: 20px * mod(animation-tick(), 2s) / 2s `
+此函数返回一个单调递增的时间，可用于动画。
+从绑定调用此函数将不断重新计算绑定。
+它可以这样使用：`x: 1000px + sin(animation-tick() / 1s * 360deg) * 100px;` 或 `y: 20px * mod(animation-tick(), 2s) / 2s `
 
 ```slint
 export component Example inherits Window {
@@ -30,4 +30,5 @@ export component Example inherits Window {
 
 ## `debug(...)`
 
-The debug function can take one or multiple values as arguments, prints them, and returns nothing.
+调试函数可以将一个或多个值作为参数，打印它们，然后返回无。
+
