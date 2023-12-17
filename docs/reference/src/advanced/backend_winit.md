@@ -1,27 +1,23 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Winit Backend
+# Winit 后端
 
-The Winit backend uses the [winit](https://docs.rs/winit/latest/winit/) library to interact with the
-windowing system.
+Winit 后端使用 [winit](https://docs.rs/winit/latest/winit/) 库与窗口系统交互。
 
-The Winit backend supports practically all relevant operating systems and windowing systems, including
-macOS, Windows, Linux with Wayland and X11.
+Winit 后端支持几乎所有相关的操作系统和窗口系统，包括 macOS、Windows、Linux（使用 Wayland 和 X11）以及通过 KMS 或专有驱动程序的直接全屏渲染。
 
-The Winit backend supports different renderers. They can be explicitly selected for use through the
-`SLINT_BACKEND` environment variable.
+Winit 后端支持不同的渲染器。可以通过`SLINT_BACKEND`环境变量显式选择它们以供使用。
 
-| Renderer name | Supported/Required Graphics APIs            | `SLINT_BACKEND` value to select renderer |
+| 渲染器名称 | 支持/需要的图形 API            | 选择渲染器的`SLINT_BACKEND`值 |
 |---------------|---------------------------------------------|------------------------------------------|
 | FemtoVG       | OpenGL                                      | `winit-femtovg`                          |
 | Skia          | OpenGL, Metal, Direct3D, Software-rendering | `winit-skia`                             |
-| Skia Software | Software-only rendering with Skia           | `winit-skia-software`                    |
-| software      | Software-rendering, no GPU required         | `winit-software`                         |
+| Skia Software | 仅软件渲染的 Skia           | `winit-skia-software`                    |
+| software      | 仅软件渲染，不需要 GPU         | `winit-software`                         |
 
+## 配置选项
 
-## Configuration Options
+Winit 后端读取并解释以下环境变量：
 
-The Winit backend reads and interprets the following environment variables:
-
-| Name               | Accepted Values | Description                                                        |
+| 名称               | 接受的值       | 描述                                                        |
 |--------------------|-----------------|--------------------------------------------------------------------|
-| `SLINT_FULLSCREEN` | any value       | If this variable is set, every window is shown in fullscreen mode. |
+| `SLINT_FULLSCREEN` | 任何值       | 如果设置了此变量，则每个窗口都会以全屏模式显示。 |

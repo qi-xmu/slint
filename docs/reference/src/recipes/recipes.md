@@ -1,10 +1,8 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
 <!-- cSpell: ignore dgettext ngettext xgettext -->
+# 自定义控件介绍
 
-
-# Custom Control Introduction
-
-## A Clickable Button
+## 一个可点击的按钮
 
 ```slint,no-auto-preview
 import { VerticalBox, Button } from "std-widgets.slint";
@@ -21,33 +19,19 @@ export component Recipe inherits Window {
 }
 ```
 
-In this first example, you see the basics of the Slint language:
+在第一个示例中，您可以看到 Slint 语言的基础知识：
 
- - We import the `VerticalBox` layout and the `Button` widget from the standard library
-   using the `import` statement. This statement can import widgets or your own components
-   declared in different files. You don't need to import built-in element such as `Window` or `Rectangle`.
- - We declare the `Recipe` component using the `component` keyword. `Recipe` inherits from `Window`
-   and has elements: A layout (`VerticalBox`) with one button.
- - You instantiate elements using their name followed by a pair of braces (with optional contents.
-   You can assign a name to a specific element using `:=`
- - Elements have properties. Use `:` to set property values. Here we assign a
-   binding that computes a string by concatenating some string literals, and the
-   `counter` property to the `Button`'s `text` property.
- - You can declare custom properties for any element with `property <...>`. A
-   property needs to have a type, and can have a default value and an access
-   specifier. Access specifiers like `private`, `in`, `out` or `in-out` defines
-   how outside elements can interact with the property. `Private` is the default
-   value and stops any outside element from accessing the property.
-   The `counter` property is custom in this example.
- - Elements can also have callback. In this case we assign a callback
-   handler to the `clicked` callback of the `button` with `=> { ... }`.
- - Property bindings are automatically re-evaluated if any of the properties the
-   binding depends on changes. The `text` binding of the button is
-   automatically re-computed whenever the `counter` changes.
+- 我们使用 `import` 语句从标准库中导入 `VerticalBox` 布局和 `Button` 小部件。此语句可以导入小部件或您在不同文件中声明的自定义组件。您不需要导入内置元素，例如 `Window` 或 `Rectangle`。
+- 我们使用 `component` 关键字声明 `Recipe` 组件。`Recipe` 继承自 `Window`，并具有元素：一个布局（`VerticalBox`）和一个按钮。
+- 您可以使用名称后跟一对大括号（可选内容）来实例化元素。您可以使用 `:=` 为特定元素分配名称。
+- 元素具有属性。使用 `:` 来设置属性值。在这里，我们分配了一个绑定，该绑定通过连接一些字符串文字和 `counter` 属性来计算字符串，并将 `counter` 属性分配给 `Button` 的 `text` 属性。
+- 您可以使用 `property <...>` 为任何元素声明自定义属性。属性需要具有类型，可以具有默认值和访问说明符。访问说明符（例如 `private`、`in`、`out` 或 `in-out`）定义了外部元素如何与该属性交互。`Private` 是默认值，并阻止任何外部元素访问该属性。在此示例中，`counter` 属性是自定义的。
+- 元素还可以具有回调。在这种情况下，我们使用 `=> { ... }` 将回调处理程序分配给 `button` 的 `clicked` 回调。
+- 如果绑定依赖的任何属性发生更改，则属性绑定会自动重新计算。按钮的 `text` 绑定在 `counter` 更改时自动重新计算。
 
-## React to a Button Click in Native Code
+## 在本机代码中响应按钮点击
 
-This example increments the `counter` using native code:
+此示例使用本机代码增加 `counter`：
 
 ```slint,no-preview
 import { VerticalBox, Button } from "std-widgets.slint";
@@ -62,23 +46,16 @@ export component Recipe inherits Window {
 }
 ```
 
-The `<=>` syntax binds two callbacks together. Here the new `button-pressed`
-callback binds to `button.clicked`.
+`<=>` 语法将两个回调绑定在一起。在这里，新的 `button-pressed` 回调绑定到 `button.clicked`。
 
-The root element of the main component exposes all non-`private` properties and
-callbacks to native code.
+主组件的根元素将所有非 `private` 属性和回调公开给本机代码。
 
-In Slint, `-` and `_` are equivalent and interchangable in all identifiers.
-This is different in native code: Most programming languages forbid `-` in
-identifiers, so `-` is replaced with `_`.
+在 Slint 中，`-` 和 `_` 在所有标识符中都是等效的。这在本机代码中是不同的：大多数编程语言禁止在标识符中使用 `-`，因此 `-` 会替换为 `_`。
 
 <details data-snippet-language="rust">
-<summary>Rust code</summary>
+<summary>Rust 代码</summary>
 
-For technical reasons, this example uses `import {Recipe}` in the `slint!` macro.
-In real code, you can put the whole Slint code in the `slint!` macro, or use
-an external `.slint` file together with a build script.
-
+由于技术原因，此示例在 `slint!` 宏中使用 `import {Recipe}`。在实际代码中，您可以将整个 Slint 代码放在 `slint!` 宏中，或者与构建脚本一起使用外部 `.slint` 文件。
 
 ```rust,no_run
 slint::slint!(import { Recipe } from "docs/reference/src/recipes/button_native.slint";);
@@ -96,24 +73,16 @@ fn main() {
 }
 ```
 
-The Slint compiler generates a `struct Recipe` with a getter (`get_counter`) and
-a setter (`set_counter`) for each accessible property of the root element of the
-`Recipe` component. It also generates a function for each accessible callback,
-like in this case `on_button_pressed`.
+Slint编译器为`Recipe`组件的根元素生成一个`struct Recipe`，其中包含每个可访问属性的getter（`get_counter`）和setter（`set_counter`）。它还为每个可访问回调生成一个函数，在这种情况下为`on_button_pressed`。
 
-The `Recipe` struct implements the [`slint::ComponentHandle`] trait. A component
-manages a strong and a weak reference count, similar to an `Rc`.
-We call the `as_weak` function to get a weak handle to the component, which we
-can move into the callback.
+`Recipe`结构实现了[`slint::ComponentHandle`] trait。组件管理强引用和弱引用计数，类似于`Rc`。我们调用`as_weak`函数来获取对组件的弱引用，我们可以将其移动到回调中。
 
-We can't use a strong handle here, because that would form a cycle: The component
-handle has ownership of the callback, which itself has ownership of the
-closure's captured variables.
+我们不能在这里使用强引用，因为这将形成一个循环：组件句柄拥有回调的所有权，回调本身拥有闭包的捕获变量的所有权。
 </details>
 
 <details data-snippet-language="cpp">
-<summary>C++ code</summary>
-In C++ you can write
+<summary>C++ 代码</summary>
+在 C++ 中，你可以这样写
 
 ```cpp
 #include "button_native.h"
@@ -130,18 +99,13 @@ int main(int argc, char **argv)
 }
 ```
 
-The CMake integration handles the Slint compiler invocations as needed,
-which will parse the `.slint` file and generate the `button_native.h` header.
+CMake 集成会根据需要处理 Slint 编译器调用，该编译器将解析 `.slint` 文件并生成 `button_native.h` 头文件。
 
-This header file contains a `Recipe` class with a getter and setter for each
-accessible property, as well as a function to set up a callback
-for each accessible callback in `Recipe`. In this case we will have `get_counter`,
-`set_counter` to access the `counter` property and `on_button_pressed` to
-set up the callback.
+此头文件包含一个 `Recipe` 类，其中包含每个可访问属性的 getter 和 setter，以及一个函数来为 `Recipe` 中的每个可访问回调设置回调。在这种情况下，我们将有 `get_counter`、`set_counter` 来访问 `counter` 属性，以及 `on_button_pressed` 来设置回调。
 
 </details>
 
-## Use Property Bindings to Synchronize Controls
+## 使用属性绑定同步控件
 
 ```slint,no-auto-preview
 import { VerticalBox, Slider } from "std-widgets.slint";
@@ -157,14 +121,13 @@ export component Recipe inherits Window {
 }
 ```
 
-This example introduces the `Slider` widget.
+此示例介绍了 `Slider` 小部件。
 
-It also introduces interpolation in string literals: Use `\{...}` to render
-the result of code between the curly braces as a string.
+它还介绍了字符串文字中的插值：使用 `\{...}` 将花括号之间的代码的结果呈现为字符串。
 
-# Animation Examples
+# 动画示例
 
-## Animate the Position of an Element
+## 动画元素的位置
 
 ```slint,no-auto-preview
 import { CheckBox } from "std-widgets.slint";
@@ -199,14 +162,11 @@ export component Recipe inherits Window {
 }
 ```
 
-Layouts position elements automatically. In this example we manually position
-elements instead, using the `x`, `y`, `width`, `height` properties.
+布局自动定位元素。在此示例中，我们手动定位元素，使用 `x`、`y`、`width`、`height` 属性。
 
-Notice the `animate x` block that specifies an animation. It's run whenever the
-property changes: Either because a callback sets the property, or because
-its binding value changes.
+请注意 `animate x` 块，该块指定动画。每当属性更改时运行它：因为回调设置属性，或者因为其绑定值发生更改。
 
-## Animation Sequence
+## 动画序列
 
 ```slint,no-auto-preview
 import { CheckBox } from "std-widgets.slint";
@@ -248,11 +208,11 @@ export component Recipe inherits Window {
 }
 ```
 
-This example uses the `delay` property to make one animation run after another.
+这个例子使用 `delay` 属性使一个动画在另一个动画之后运行。
 
-# States Examples
+# 状态示例
 
-## Associate Property Values With States
+## 将属性值与状态关联
 
 ```slint,no-auto-preview
 import { HorizontalBox, VerticalBox, Button } from "std-widgets.slint";
@@ -300,7 +260,7 @@ export component Recipe inherits Window {
 }
 ```
 
-## Transitions
+## 翻译
 
 ```slint,no-auto-preview
 import { HorizontalBox, VerticalBox, Button } from "std-widgets.slint";
@@ -348,9 +308,9 @@ export component Recipe inherits Window {
 }
 ```
 
-# Layout Examples
+# 布局示例
 
-## Vertical
+## 垂直布局
 
 ```slint,no-auto-preview
 import { VerticalBox, Button } from "std-widgets.slint";
@@ -363,7 +323,7 @@ export component Recipe inherits Window {
 }
 ```
 
-## Horizontal
+## 水平布局
 
 ```slint,no-auto-preview
 import { HorizontalBox, Button } from "std-widgets.slint";
@@ -376,7 +336,7 @@ export component Recipe inherits Window {
 }
 ```
 
-## Grid
+## 网格
 
 ```slint,no-auto-preview
 import { GridBox, Button, Slider } from "std-widgets.slint";
@@ -399,14 +359,14 @@ export component Recipe inherits Window {
 }
 ```
 
-# Global Callbacks
+# 全局回调
 
-## Invoke a Globally Registered Native Callback from Slint
+## 从 Slint 调用全局注册的本机回调
 
-This example uses a global singleton to implement common logic in native code.
-This singleton may also store properties that are accessible to native code.
+此示例使用全局单例在本机代码中实现通用逻辑。
+此单例还可以存储本机代码可以访问的属性。
 
-Note: The preview visualize the Slint code only. It's not connected to the native code.
+注意：预览仅可视化 Slint 代码。它未连接到本机代码。
 
 ```slint,no-preview
 import { HorizontalBox, VerticalBox, LineEdit } from "std-widgets.slint";
@@ -434,9 +394,11 @@ export component Recipe inherits Window {
 }
 ```
 
+
+
 <details  data-snippet-language="rust">
-<summary>Rust code</summary>
-In Rust you can set the callback like this:
+<summary>Rust 代码</summary>
+在 Rust 中，您可以这样设置回调：
 
 ```rust
 slint::slint!{
@@ -476,8 +438,8 @@ fn main() {
 </details>
 
 <details  data-snippet-language="cpp">
-<summary>C++ code</summary>
-In C++ you can set the callback like this:
+<summary>C++ 代码</summary>
+在 C++ 中，您可以这样设置回调：
 
 ```cpp
 int main(int argc, char **argv)
@@ -493,9 +455,9 @@ int main(int argc, char **argv)
 ```
 </details>
 
-# Custom Widgets
+# 自定义组件
 
-## Custom Button
+## 自定义按钮
 
 ```slint,no-auto-preview
 component Button inherits Rectangle {
@@ -523,7 +485,7 @@ export component Recipe inherits Window {
 }
 ```
 
-## ToggleSwitch
+## 开关按钮
 
 ```slint,no-auto-preview
 export component ToggleSwitch inherits Rectangle {
@@ -587,10 +549,9 @@ export component Recipe inherits Window {
 }
 ```
 
-## CustomSlider
+## 自定义滑块
 
-The `TouchArea` is covering the entire widget, so you can drag this slider from
-any point within itself.
+`TouchArea` 覆盖整个小部件，因此您可以从其中的任何点拖动此滑块。
 
 ```slint,no-auto-preview
 import { VerticalBox } from "std-widgets.slint";
@@ -649,9 +610,9 @@ export component Recipe inherits Window {
 }
 ```
 
-This example show another implementation that has a drag-able handle:
-The handle only moves when we click on that handle.
-The TouchArea is within the handle and moves with the handle.
+这个例子显示了另一种实现，它具有可拖动的手柄：
+只有在我们点击该手柄时，该手柄才会移动。
+TouchArea 在手柄内部，并随手柄一起移动。
 
 ```slint,no-auto-preview
 import { VerticalBox } from "std-widgets.slint";
@@ -704,9 +665,9 @@ export component Recipe inherits Window {
 }
 ```
 
-## Custom Tabs
+## 自定义标签栏
 
-Use this recipe as a basis to when you want to create your own custom tab widget.
+使用这个示例作为基础，当您想要创建自己的自定义标签栏小部件时。
 
 ```slint,no-auto-preview
 import { Button } from "std-widgets.slint";
@@ -752,10 +713,9 @@ export component Recipe inherits Window {
 }
 ```
 
-## Custom Table View
+## 自定义表格视图
 
-Slint provides a table widget, but you can also do something custom based on a
-`ListView`.
+Slint 提供了一个表格小部件，但是您也可以基于 `ListView` 做一些自定义。
 
 ```slint,no-auto-preview
 import { VerticalBox, ListView } from "std-widgets.slint";
@@ -829,12 +789,9 @@ export component Example inherits Window {
 }
 ```
 
-## Breakpoints for Responsive User Interfaces
+## 响应式用户界面断点
 
-Use recipe implements a responsive SideBar that collapses when the parent
-width is smaller than the given break-point. When clicking the Button, the
-SideBar expands again. Use the blue Splitter to resize the container and
-test the responsive behavior.
+使用此示例实现响应式 SideBar，当父宽度小于给定的断点时，它会折叠。单击按钮时，SideBar 再次展开。使用蓝色分隔符调整容器的大小并测试响应式行为。
 
 ```slint,no-auto-preview
 import { Button, StyleMetrics } from "std-widgets.slint";
@@ -957,6 +914,7 @@ export component SideBarTest inherits Window {
     }
 }
 ```
+
 
 <!--
 

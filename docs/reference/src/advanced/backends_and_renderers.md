@@ -1,35 +1,27 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
+# 后端 & 渲染器
 
-# Backends & Renderers
+在 Slint 中，后端是封装与操作系统的交互的模块，特别是窗口子系统。可以将多个后端编译到 Slint 中，并在应用程序启动时为使用选择一个后端。您可以在没有内置后端的情况下配置 Slint，而是通过实现 Slint 的平台抽象和窗口适配器接口来开发自己的后端。
 
-In Slint, a backend is the module that encapsulates the interaction with the operating system,
-in particular the windowing sub-system. Multiple backends can be compiled into Slint and one
-backend is selected for use at run-time on application start-up. You can configure Slint without
-any built-in backends, and instead develop your own backend by implementing Slint's platform
-abstraction and window adapter interfaces.
+后端的选择如下：
 
-The backend is selected as follows:
-
-1. The developer provides their own backend and sets it programmatically.
-2. Else, the backend is selected by the value of the `SLINT_BACKEND` environment variable, if it is set.
-3. Else, backends are tried for initialization in the following order:
+1. 开发人员提供自己的后端并以编程方式设置它。
+2. 否则，后端是通过`SLINT_BACKEND`环境变量的值选择的，如果设置了该变量。
+3. 否则，按照以下顺序尝试初始化后端：
    1. qt
    2. winit
    3. linuxkms
 
-The following table provides an overview over the built-in backends. For more information about the backend's
-capabilities and their configuration options, see the respective sub-pages.
+下表提供了内置后端的概述。有关后端功能及其配置选项的更多信息，请参见各个子页面。
 
-| Backend Name | Description                                                                                             | Built-in by Default   |
+| 后端名称 | 描述                                                                                             | 默认内置   |
 |--------------|---------------------------------------------------------------------------------------------------------|-----------------------|
-| qt           | The Qt library is used for windowing system integration, rendering, and native widget styling.          | Yes (if Qt installed) |
-| winit        | The [winit](https://docs.rs/winit/latest/winit/) library is used to interact with the windowing system. | Yes                   |
-| linuxkms     | Linux's KMS/DRI infrastructure is used for rendering. No windowing system or compositor is required.    | No                    |
+| qt           | 使用 Qt 库进行窗口系统集成、渲染和本机小部件样式。          | 是 (如果安装了 Qt) |
+| winit        | 使用 [winit](https://docs.rs/winit/latest/winit/) 库与窗口系统交互。 | 是                   |
+| linuxkms     | Linux 的 KMS/DRI 基础设施用于渲染。不需要窗口系统或合成器。    | 否                    |
 
-A backend is also responsible for selecting a renderer. See the [Renderers](#renderers) section
-for an overview. Override the choice of renderer by adding the name to the `SLINT_BACKEND` environment variable, separated by a dash.
-For example if you want to choose the `winit` backend in combination with the `software` renderer, set `SLINT_BACKEND=winit-software`.
-Similarly, `SLINT_BACKEND=linuxkms-skia` chooses the `linuxkms` backend and then instructs the LinuxKMS backend to use Skia for rendering.
+后端还负责选择渲染器。请参见[渲染器](#渲染器)部分。
+通过将名称添加到`SLINT_BACKEND`环境变量中（用破折号分隔）来覆盖渲染器的选择。例如，如果要选择`winit`后端以及`software`渲染器，请设置`SLINT_BACKEND=winit-software`。类似地，`SLINT_BACKEND=linuxkms-skia`选择`linuxkms`后端，然后指示 LinuxKMS 后端使用 Skia 进行渲染。
 
 ```{toctree}
 :hidden:
@@ -40,83 +32,74 @@ backend_winit.md
 backend_linuxkms.md
 ```
 
-## Renderers
+## 渲染器
 
-Slint comes with different renderers that use different techniques and libraries to turn
-your scene of elements into pixels. Slint picks a renderer backend on your choice of Backend
-as well as the features you've selected at Slint compilation time.
+Slint 提供了不同的渲染器，这些渲染器使用不同的技术和库将元素场景转换为像素。Slint 根据您选择的后端以及在 Slint 编译时选择的功能来选择渲染器后端。
 
+### Qt 渲染器
 
-### Qt Renderer
+Qt 渲染器随 [Qt 后端](backend_qt.md)一起提供，并使用 QPainter 进行渲染：
 
-The Qt renderer comes with the [Qt backend](backend_qt.md) and renders using QPainter:
+- 软件渲染，无 GPU 加速。
+- 仅在 Qt 后端中可用。
 
- - Software rendering, no GPU acceleration.
- - Available only in the Qt backend.
+### 软件渲染器
 
-### Software Renderer
+- 在任何地方运行，高度可移植且轻量级。
+- 软件渲染，无 GPU 加速。
+- 支持部分渲染。
+- 支持逐行渲染（仅 Rust）。
+- 适用于微控制器。
+- 尚未实现某些功能：
+  * 不支持`Path`。
+  * 不支持图像旋转或平滑缩放。
+  * 不支持`drop-shadow-*`属性。
+  * 不支持`clip: true`与`border-radius`的组合。
+  * 没有圆形渐变。
 
-- Runs anywhere, highly portable, and lightweight.
-- Software rendering, no GPU acceleration.
-- Supports partial rendering.
-- Supports line-by-line rendering (Rust only).
-- Suitable for Microcontrollers.
-- Some features haven't been implemented yet:
-  * No support for `Path`.
-  * No image rotation or smooth scaling.
-  * No support for `drop-shadow-*` properties.
-  * No support for `border-radius` in combination with `clip: true`.
-  * No circular gradients.
-- Text rendering currently limited to western scripts.
-- Available in the [Winit backend](backend_winit.md).
-- Public [Rust](slint-rust:platform/software_renderer/) and [C++](slint-cpp:api/classslint_1_1platform_1_1SoftwareRenderer) API.
+- 文本渲染目前仅限于西文。
+- 在 [Winit 后端](backend_winit.md)中可用。
+- 公共 [Rust](slint-rust:platform/software_renderer/) 和 [C++](slint-cpp:api/classslint_1_1platform_1_1SoftwareRenderer) API。
 
-### FemtoVG Renderer
+### FemtoVG 渲染器
 
- - Highly portable.
- - GPU acceleration with OpenGL (required).
- - Text and path rendering quality sometimes sub-optimal.
- - Available in the [Winit backend](backend_winit.md) and [LinuxKMS backend](backend_linuxkms.md).
- - Public [Rust](slint-rust:platform/femtovg_renderer/) API.
+- 高度可移植。
+- GPU 加速，需要 OpenGL。
+- 文本和路径渲染质量有时不太理想。
+- 在 [Winit 后端](backend_winit.md)和 [LinuxKMS 后端](backend_linuxkms.md)中可用。
+- 公共 [Rust](slint-rust:platform/femtovg_renderer/) API。
 
-### Skia Renderer
+### Skia 渲染器
 
- - Sophisticated GPU acceleration with OpenGL, Metal, Vulkan, and Direct3D.
- - Heavy disk-footprint compared to other renderers.
- - Available in the [Winit backend](backend_winit.md) and [LinuxKMS backend](backend_linuxkms.md).
- - Public [C++](slint-cpp:api/classslint_1_1platform_1_1SkiaRenderer) API.
+- 使用 OpenGL、Metal、Vulkan 和 Direct3D 的复杂 GPU 加速。
+- 与其他渲染器相比，磁盘占用空间较大。
+- 在 [Winit 后端](backend_winit.md)和 [LinuxKMS 后端](backend_linuxkms.md)中可用。
+- 公共 [C++](slint-cpp:api/classslint_1_1platform_1_1SkiaRenderer) API。
 
-#### Troubleshooting
+#### 故障排除
 
-You may run into compile issues when enabling the Skia renderer. The following sections track
-issues we're aware of and how to resolve them.
+启用 Skia 渲染器时，您可能会遇到编译问题。以下部分跟踪我们所知道的问题以及如何解决它们。
 
-* Compilation error on Windows with messages about multiple source files and unused linker input
+* Windows 上的编译错误，其中包含有关多个源文件和未使用的链接器输入的消息
 
-  You may see compile errors that contain this error and warning from clang-cl:
+  您可能会看到包含此错误和来自 clang-cl 的警告的编译错误：
   ```
    clang-cl: error: cannot specify '/Foobj/src/fonts/fontmgr_win.SkFontMgr_indirect.obj' when compiling multiple source files
    clang-cl: warning: Hausmann/.cargo/registry/src/index.crates.io-6f17d22bba15001f/skia-bindings-0.66.0/skia: 'linker' input unused [-Wunused-command-line-argument]
   ```
 
-  The Skia sources are checked out in a path that's managed by Cargo, the Rust package manager.
-  The error happens when that path contains spaces. By default that's in `%HOMEPATH%\.cargo`,
-  which contains spaces if the login name contains spaces. To resolve this issue, set the `CARGO_HOME`
-  environment variable to a path without spaces, such as `c:\cargo_home`.
+  Skia 源代码在 Cargo 管理的路径中检出，Rust 包管理器。当该路径包含空格时，错误会发生。默认情况下在 `%HOMEPATH%\.cargo`，如果登录名包含空格，则包含空格。要解决此问题，请将 `CARGO_HOME` 环境变量设置为不包含空格的路径，例如 `c:\cargo_home`。
 
-* Compilation error when compiling for ARMv7 with hardware floating-pointer support
+* 在启用硬件浮点支持的 ARMv7 上编译时出现编译错误。
 
-  You may see compiler errors that contain this message:
+  您可能会看到包含此消息的编译错误：
 
   ```
    Unable to generate bindings: ClangDiagnostic("/home/runner/work/slint/yocto-sdk/sysroots/cortexa15t2hf-neon-poky-linux-gnueabi/usr/include/gnu/stubs-32.h:7:11: fatal error: 'gnu/stubs-soft.h' file not found\n")
   ```
 
-  The Skia build invokes clang in multiple occasions and is sensitive to compiler flags
-  that affect the floating point abi (such as `-mfloat-abi=hard`), as they affect header file lookups.
+  Skia 构建在多个场合下调用 clang，并且对影响头文件查找的浮点 abi 的编译器标志（例如`-mfloat-abi=hard`）敏感。
 
-  The solve this, set the `BINDGEN_EXTRA_CLANG_ARGS` environment variable to contain the same
-  flags that your build environment also passes to the C++ compiler.
+  要解决此问题，请将 `BINDGEN_EXTRA_CLANG_ARGS` 环境变量设置为包含您的构建环境也传递给 C++ 编译器的相同标志。
 
-  For example, if you're building against a Yocto SDK, then you can find these flags in the
-  `OECORE_TUNE_CCARGS` environment variable.
+  例如，如果您正在使用 Yocto SDK 进行构建，则可以在`OECORE_TUNE_CCARGS`环境变量中找到这些标志。

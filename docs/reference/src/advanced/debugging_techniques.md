@@ -1,35 +1,33 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Debugging Techniques
+# 调试技巧
 
-On this page we share different techniques and tools we've built into Slint that help you track down different issues you may be running into, during the design and development.
+在本页中，我们分享了不同的技术和工具，这些技术和工具已经集成到 Slint 中，可以帮助您跟踪设计和开发过程中可能遇到的不同问题。
 
-## Debugging Property Values
+## 调试属性值
 
-Use the [`debug()`](../language/builtins/functions.md#debug) function to print the values of properties to stderr.
+使用 [`debug()`](../language/builtins/functions.md#debug) 函数将属性的值打印到 stderr。
 
-## Slow Motion Animations
+## 慢动画
 
-Animations in the user interface need to be carefully designed to have the correct duration and changes in element positioning or size need to follow an easing curve.
+用户界面中的动画需要仔细设计，以确保具有正确的持续时间，并且元素定位或大小的更改需要遵循缓动曲线。
 
-To inspect the animations in your application, set the `SLINT_SLOW_ANIMATIONS` environment variable before running the program. This variable accepts an unsigned integer value that is the factor by which to globally slow down the steps of all animations, automatically. This means that you don't have to make any manual changes to the `.slint` markup and recompile. For example,`SLINT_SLOW_ANIMATIONS=4` slows down animations by a factor of four.
+要检查应用程序中的动画，请在运行程序之前设置 `SLINT_SLOW_ANIMATIONS` 环境变量。此变量接受无符号整数值，该值是全局减慢所有动画步骤的因子。这意味着您不必对 `.slint` 标记进行任何手动更改并重新编译。例如，`SLINT_SLOW_ANIMATIONS=4` 将动画减慢四倍。
 
-## User Interface Scaling
+## 用户界面缩放
 
-The use of logical pixel lengths throughout `.slint` files lets Slint compute the number of physical pixels, dynamically, depending on the device-pixel ratio of the screen. To get an impression of how the individual elements look like when rendered on a screen with a different device-pixel ratio, set the `SLINT_SCALE_FACTOR` environment variable before running the program. This variable accepts a floating pointer number that is used to convert logical pixel lengths to physical pixel lengths. For example, `SLINT_SCALE_FACTOR=2` renders the user interface in a way where every logical pixel has twice the width and height.
+在 `.slint` 文件中使用逻辑像素长度，让 Slint 根据屏幕的设备像素比动态计算物理像素的数量。为了对个别元素在不同设备像素比的屏幕上的外观有所了解，请在运行程序之前设置 `SLINT_SCALE_FACTOR` 环境变量。此变量接受浮点数，用于将逻辑像素长度转换为物理像素长度。例如，`SLINT_SCALE_FACTOR=2` 以逻辑像素的两倍宽度和高度呈现用户界面。
 
-_Note_: Currently, only the FemtoVG and Skia renderers support this environment variable.
+_注意_：目前，只有 FemtoVG 和 Skia 渲染器支持此环境变量。
 
-## Debugging for Performance Improvements
+## 性能改进的调试
 
-Slint attempts to use hardware-acceleration to ensure that rendering the user interface consumes a minimal amount of CPU resources while maintaining smooth animations. However, depending on the complexity of the user interface, quality of the graphics drivers, or the power of the GPU in your system, you may hit limits and experience slowness. To address this
-issue, set the `SLINT_DEBUG_PERFORMANCE` environment variable before running the program, to inspect the frame rate. The following options affect the frame rate inspection and reporting:
+Slint 尝试使用硬件加速来确保渲染用户界面时消耗的 CPU 资源最少，同时保持平滑的动画。但是，根据用户界面的复杂性、图形驱动程序的质量或系统中 GPU 的功率，您可能会遇到限制并遇到缓慢的情况。为了解决这个问题，在运行程序之前设置 `SLINT_DEBUG_PERFORMANCE` 环境变量，以检查帧率。以下选项会影响帧率检查和报告：
 
--   `refresh_lazy`: The frame rate is measured only when an actual frame is rendered, for example due to a running animation, user interaction, or some other state change that results in a visual difference in the user interface. If
-there is no change, a low frame rate is reported. Use this option to verify that no unnecessary repainting happens when there are no visual changes. For example, in a user interface that shows a text input field with a cursor that blinks once per second, the reported frame rate should be two.
--   `refresh_full_speed`: The user interface is continuously refreshed, even if nothing is changed. This continuous refresh results in a higher load on the system. Use this option to identify any bottlenecks that prevent you from achieving smooth animations. Also disables partial rendering with the software renderer.
--   `console`: The frame rate is printed to `stderr` on the console.
--   `overlay`: The frame rate is as an overlay text label on top of the user interface in each window.
+-   `refresh_lazy`：仅在实际渲染帧时（例如由于运行动画、用户交互或某些其他状态更改而导致的）测量帧率。如果没有更改，则报告低帧率。使用此选项来验证在没有视觉变化的情况下不会发生不必要的重绘。例如，在用户界面中，显示带有每秒闪烁一次的光标的文本输入字段的情况下，报告的帧率应为两个。
+-   `refresh_full_speed`：用户界面被连续刷新，即使没有任何更改。这种连续的刷新会增加系统负载。使用此选项来识别任何阻止您实现平滑动画的瓶颈。还禁用软件渲染器的部分渲染。
+-   `console`：帧率在控制台上打印到 `stderr`。
+-   `overlay`：帧率作为覆盖文本标签呈现在每个窗口的顶部。
 
-Use these options in combination, separated by a comma. You must select a combination of one frame rate measurement method and a reporting method. For example, `SLINT_DEBUG_PERFORMANCE=refresh_full_speed,overlay` repeatedly re-renders the entire user interface in each window and prints the achieved frame rate in the top-left corner. In comparison, `SLINT_DEBUG_PERFORMANCE=refresh_lazy,console,overlay` measures the frame rate only when something in the user interface changes and the measured value is printed to `stderr` as well as rendered as an overlay text label.
+使用这些选项的组合，用逗号分隔。您必须选择一种帧率测量方法和一种报告方法的组合。例如，`SLINT_DEBUG_PERFORMANCE=refresh_full_speed,overlay` 会在每个窗口中重复重新渲染整个用户界面，并在左上角打印实现的帧率。相比之下，`SLINT_DEBUG_PERFORMANCE=refresh_lazy,console,overlay` 仅在用户界面中的某些内容发生更改且测量值打印到 `stderr` 时才测量帧率。
 
-The environment variable must be set before running the program. If the application runs on a microcontroller without the standard library, the environment variable must be set during compilation.
+必须在运行程序之前设置环境变量。如果应用程序在没有标准库的微控制器上运行，则必须在编译期间设置环境变量。

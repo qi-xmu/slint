@@ -1,19 +1,16 @@
 <!-- Copyright © SixtyFPS GmbH <info@slint.dev> ; SPDX-License-Identifier: MIT -->
-# Qt Backend
+# Qt 后端
 
-The Qt backend uses the [Qt](https://www.qt.io) library to interact with the windowing system, for
-rendering, as well as widget style for a native look and feel.
+Qt 后端使用 [Qt](https://www.qt.io) 库与窗口系统进行交互，用于渲染以及本机外观和感觉的小部件样式。
 
-The Qt backend supports practically all relevant operating systems and windowing systems, including
-macOS, Windows, Linux with Wayland and X11, and direct full-screen rendering via KMS or proprietary drivers.
+Qt 后端支持几乎所有相关的操作系统和窗口系统，包括 macOS、Windows、Linux（使用 Wayland 和 X11）以及通过 KMS 或专有驱动程序的直接全屏渲染。
 
-The Qt backend only supports software rendering at the moment. That means it runs with any graphics driver,
-but it does not utilize GPU hardware acceleration.
+Qt 后端目前仅支持软件渲染。这意味着它可以在任何图形驱动程序上运行，但它不会利用 GPU 硬件加速。
 
-## Configuration Options
+## 配置选项
 
-The Qt backend reads and interprets the following environment variables:
+Qt 后端读取并解释以下环境变量：
 
-| Name               | Accepted Values | Description                                                        |
+| 名称               | 接受的值       | 描述                                                        |
 |--------------------|-----------------|--------------------------------------------------------------------|
-| `SLINT_FULLSCREEN` | any value       | If this variable is set, every window is shown in fullscreen mode. |
+| `SLINT_FULLSCREEN` | 任何值       | 如果设置了此变量，则每个窗口都会以全屏模式显示。 |
